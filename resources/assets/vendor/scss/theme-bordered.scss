@@ -1,0 +1,392 @@
+@import './_components/include';
+@import './_theme/common';
+@import './_theme/libs';
+@import './_theme/pages';
+@import './_theme/_theme';
+
+$primary-color: #ff6f61;
+$body-bg: #f0e4d7;
+$card-bg: #ffffff;
+$border-color: #ffb6c1;
+$body-color: #333333;
+$headings-color: #6b2a43;
+
+body {
+  background: linear-gradient(180deg, #f0e4d7 0%, #a1c4fd 100%);
+  font-family: 'Dancing Script', cursive;
+  color: $body-color;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden; /* Evita el scroll horizontal */
+}
+
+.bg-body {
+  background: $body-bg !important;
+}
+
+// Elementos decorativos
+.background {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  background: linear-gradient(180deg, #f0e4d7 0%, #a1c4fd 100%);
+  overflow: hidden;
+}
+
+.cloud {
+  position: absolute;
+  background: white;
+  border-radius: 50%;
+  box-shadow: -15px 15px 10px rgba(0, 0, 0, 0.1);
+}
+
+.cloud:before,
+.cloud:after {
+  content: '';
+  position: absolute;
+  background: white;
+  border-radius: 50%;
+}
+
+.cloud:before {
+  width: 100px;
+  height: 100px;
+  top: -50px;
+  left: -50px;
+}
+
+.cloud:after {
+  width: 100px;
+  height: 100px;
+  top: -50px;
+  right: -50px;
+}
+
+.cloud-1 {
+  width: 200px;
+  height: 60px;
+  top: 50px;
+  left: 20%;
+}
+
+.cloud-2 {
+  width: 300px;
+  height: 90px;
+  top: 150px;
+  left: 70%;
+}
+
+.cloud-3 {
+  width: 150px;
+  height: 45px;
+  top: 250px;
+  left: 40%;
+}
+
+.star {
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  background: #fff176;
+  border-radius: 50%;
+  box-shadow: 0 0 10px #fff176, 0 0 20px #fff176, 0 0 30px #fff176;
+}
+
+.star-1 {
+  top: 10%;
+  left: 30%;
+}
+
+.star-2 {
+  top: 20%;
+  left: 60%;
+}
+
+.star-3 {
+  top: 70%;
+  left: 80%;
+}
+
+.dropdown-menu,
+.popover,
+.toast,
+.flatpickr-calendar,
+.datepicker.datepicker-inline,
+.datepicker.datepicker-inline table,
+.daterangepicker,
+.pcr-app,
+.ui-timepicker-wrapper,
+.twitter-typeahead .tt-menu,
+// .tagify__dropdown,
+.swal2-popup,
+.select2-dropdown,
+.menu-horizontal .menu-inner > .menu-item.open .menu-sub,
+div.dataTables_wrapper .dt-button-collection {
+  outline: none;
+  box-shadow: none !important;
+  border: 1px solid $border-color !important;
+}
+
+.flatpickr-days,
+.flatpickr-time {
+  border-width: 0 !important;
+}
+
+// Bootstrap select > double border fix
+.dropdown-menu .dropdown-menu {
+  border: none !important;
+}
+
+.datepicker.datepicker-inline {
+  width: fit-content;
+  border-radius: $border-radius;
+}
+
+.modal-content,
+.offcanvas,
+// .shepherd-element,
+div.dataTables_wrapper .dt-button-collection > div[role='menu'] {
+  box-shadow: none !important;
+}
+
+.select2-dropdown {
+  border-color: $border-color !important;
+}
+
+.bs-popover-start > .popover-arrow::before,
+.bs-popover-auto[data-popper-placement^='left'] > .popover-arrow::before {
+  border-left-color: $border-color !important;
+  right: -1px;
+}
+
+.bs-popover-end > .popover-arrow::before,
+.bs-popover-auto[data-popper-placement^='right'] > .popover-arrow::before {
+  border-right-color: $border-color !important;
+  left: -1px;
+}
+
+.bs-popover-top > .popover-arrow::before,
+.bs-popover-auto[data-popper-placement^='top'] > .popover-arrow::before {
+  border-top-color: $border-color !important;
+  bottom: -1px;
+}
+
+.bs-popover-bottom > .popover-arrow::before,
+.bs-popover-auto[data-popper-placement^='bottom'] > .popover-arrow::before {
+  border-bottom-color: $border-color !important;
+  top: -1px;
+}
+
+@include template-common-theme($primary-color);
+@include template-libs-theme($primary-color);
+@include template-pages-theme($primary-color);
+
+// Navbar
+// ---------------------------------------------------------------------------
+
+@include template-navbar-style('.bg-navbar-theme', $card-bg, $color: $body-color, $active-color: $headings-color);
+
+.layout-navbar,
+.menu-horizontal {
+  backdrop-filter: saturate(200%) blur(6px);
+}
+
+.navbar-detached {
+  border: 1px solid $border-color;
+  box-shadow: none;
+}
+
+.layout-navbar-fixed .layout-page:before {
+  backdrop-filter: saturate(200%) blur(10px);
+  background: linear-gradient(180deg, rgba($card-bg, 70%) 44%, rgba($card-bg, 43%) 73%, rgba($card-bg, 0%));
+  -webkit-mask: linear-gradient($card-bg, $card-bg 18%, transparent 100%);
+  mask: linear-gradient($card-bg, $card-bg 18%, transparent 100%);
+}
+
+.layout-horizontal .layout-navbar {
+  box-shadow: 0 1px 0 $border-color;
+}
+
+// Menu
+// ---------------------------------------------------------------------------
+
+@include template-menu-style(
+  '.bg-menu-theme',
+  $card-bg,
+  $color: $body-color,
+  $active-color: $headings-color,
+  $active-bg: $primary-color
+);
+
+.bg-menu-theme {
+  .menu-inner {
+    .menu-item {
+      &.open,
+      &.active {
+        > .menu-link.menu-toggle {
+          &,
+          .layout-menu-hover.layout-menu-collapsed & {
+            background: rgba-to-hex(rgba($black, 0.04), $rgba-to-hex-bg);
+          }
+        }
+      }
+      &:not(.active) > .menu-link:hover {
+        html:not(.layout-menu-collapsed) &,
+        .layout-menu-hover.layout-menu-collapsed & {
+          background: rgba-to-hex(rgba($black, 0.04), $rgba-to-hex-bg);
+        }
+      }
+    }
+  }
+  .menu-inner .menu-sub .menu-item:not(.active) > .menu-link::before {
+    color: $text-muted !important;
+  }
+}
+
+@include media-breakpoint-up($menu-collapsed-layout-breakpoint) {
+  .layout-menu {
+    box-shadow: 0 0 0 1px $border-color;
+  }
+}
+
+.layout-menu-horizontal {
+  box-shadow: 0 -1px 0 $border-color inset;
+}
+
+.timeline-center {
+  .timeline-item .timeline-event:after {
+    position: absolute;
+    top: 0.75rem;
+    left: -17px;
+    width: 0;
+    height: 0;
+    border-top: 1rem solid transparent;
+    border-right: 1rem solid;
+    border-left: 0 solid;
+    border-bottom: 1rem solid transparent;
+    border-left-color: $timeline-item-bg-color;
+    border-right-color: $gray-400;
+    z-index: -1;
+    content: '';
+  }
+}
+
+.timeline {
+  .timeline-item {
+    .timeline-indicator,
+    .timeline-indicator-advanced {
+      i {
+        background-color: $card-bg;
+      }
+    }
+  }
+}
+
+// Footer
+// ---------------------------------------------------------------------------
+@include template-footer-style('.bg-footer-theme', $card-bg, $color: $body-color, $active-color: $headings-color);
+
+.content-footer .footer-container {
+  .layout-footer-fixed .layout-wrapper:not(.layout-horizontal) & {
+    border: 1px solid $border-color;
+    border-bottom: 0;
+  }
+}
+
+.layout-horizontal .bg-footer-theme {
+  border-top: 1px solid $border-color;
+}
+
+// Component styles
+// ---------------------------------------------------------------------------
+
+// card
+.card {
+  box-shadow: none;
+  border: $border-width solid $card-border-color;
+}
+// card border-shadow variant
+.card {
+  &[class*='card-border-shadow-'] {
+    &:hover {
+      box-shadow: none !important;
+    }
+  }
+}
+// accordion
+.accordion:not(.accordion-bordered) {
+  .accordion-item {
+    border-top: 1px solid $card-border-color;
+    box-shadow: none !important;
+  }
+}
+
+// Tabs
+.nav-tabs-shadow {
+  box-shadow: none !important;
+  border: 1px solid $border-color !important;
+  border-radius: $border-radius;
+}
+
+.nav-pills:not(.card-header-pills) {
+  ~ .tab-content {
+    border: 1px solid $border-color;
+    border-radius: 0 0 $border-radius $border-radius;
+  }
+}
+
+// Daterangepicker
+
+.daterangepicker {
+  .ranges {
+    border-bottom: 1px solid $border-color !important;
+  }
+}
+
+// Card accordion
+.card-accordion {
+  .accordion-item {
+    box-shadow: none !important;
+    &:not(:last-of-type) {
+      border-bottom: 1px solid $card-border-color;
+    }
+  }
+}
+
+// wizard
+.wizard {
+  &.wizard-modern .wizard-header {
+    .wizard-steps {
+      .wizard-step {
+        box-shadow: none;
+        &.active {
+          background: $primary-color;
+        }
+        &.current {
+          background: $card-bg;
+          border-color: $primary-color;
+        }
+      }
+    }
+  }
+}
+
+// Perfect scrollbar
+.layout-navbar .navbar-nav-scroll,
+.layout-menu .menu-inner,
+.layout-footer-fixed .footer-container,
+.content-body .content-backdrop,
+.layout-content-fixed-footer .layout-page,
+.layout-footer .layout-page:before,
+.daterangepicker .drp-calendar,
+.dataTables_scrollBody,
+.mCustomScrollbar,
+.layout-content-overlap .content-wrapper ~ .layout-overlay,
+.overlay-with-header,
+.widget .widget-body,
+.timeline-center .timeline-item .timeline-content {
+  .mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar,
+  .mCSB_scrollTools .mCSB_draggerRail {
+    background: none;
+  }
+}

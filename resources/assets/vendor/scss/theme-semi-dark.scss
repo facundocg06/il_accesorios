@@ -1,0 +1,72 @@
+@import './_components/include';
+@import './_theme/common';
+@import './_theme/libs';
+@import './_theme/pages';
+@import './_theme/_theme';
+
+$primary-color: #58152e;
+$body-bg: #ffffff; // Fondo blanco para estilo claro
+
+body {
+  background: $body-bg;
+  font-family: "Baskerville", "Baskerville Old Face", "Hoefler Text", Garamond, "Times New Roman", serif;
+  font-size: 24px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.bg-body {
+  background: $body-bg !important;
+}
+
+// Tema común
+@include template-common-theme($primary-color);
+
+// Tema de librerías
+@include template-libs-theme($primary-color);
+
+// Tema de páginas
+@include template-pages-theme($primary-color);
+
+// Navbar
+// ---------------------------------------------------------------------------
+@include template-navbar-style('.bg-navbar-theme', lighten($primary-color, 15%), $color: $primary-color, $active-color: darken($primary-color, 15%));
+
+.layout-navbar {
+  box-shadow: 0 1px 0 rgba($primary-color, 0.1);
+}
+
+// Menú
+// ---------------------------------------------------------------------------
+@include template-menu-style('.bg-menu-theme', #f1f1f1, $color: #333333, $active-color: $primary-color, $active-bg: lighten($primary-color, 20%));
+
+.bg-menu-theme {
+  .menu-inner {
+    .menu-item {
+      &.open,
+      &.active {
+        > .menu-link.menu-toggle {
+          &,
+          .layout-menu-hover.layout-menu-collapsed & {
+            background: #f1f1f1;
+          }
+        }
+      }
+      &:not(.active) > .menu-link:hover {
+        html:not(.layout-menu-collapsed) &,
+        .layout-menu-hover.layout-menu-collapsed & {
+          background: #f1f1f1;
+        }
+      }
+    }
+  }
+}
+
+// Footer
+// ---------------------------------------------------------------------------
+@include template-footer-style('.bg-footer-theme', #f1f1f1, $color: $primary-color, $active-color: darken($primary-color, 15%));
+
+.layout-footer-fixed .layout-wrapper:not(.layout-horizontal) .content-footer .footer-container,
+.layout-footer-fixed .layout-wrapper.layout-horizontal .content-footer {
+  box-shadow: 0 -1px 0 rgba($primary-color, 0.1);
+}
