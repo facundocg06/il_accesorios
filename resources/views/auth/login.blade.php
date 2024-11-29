@@ -4,7 +4,7 @@
 
 @extends('layouts/layoutMaster')
 
-@section('title', 'Login Creamoda')
+@section('title', 'Login IL Accesorios')
 
 @section('vendor-style')
     @vite(['resources/assets/vendor/libs/@form-validation/form-validation.scss'])
@@ -32,8 +32,8 @@
                         <!-- Logo -->
                         <div class="app-brand justify-content-center mb-4 mt-2">
                             <a href="{{ url('/') }}" class="app-brand-link gap-2">
-                                <img src="{{ asset('assets/img/creamoda/logoIL.jpeg') }}" class="w-100"
-                                    alt="LOGO CREAMODA">
+                                <img src="{{ asset('assets/img/il_accesorios/logoIL.jpeg') }}" class="w-100"
+                                    alt="LOGO IL Accesorios">
                             </a>
                         </div>
                         <!-- /Logo -->

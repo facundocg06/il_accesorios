@@ -21,7 +21,7 @@ $contentLayout = (isset($container) ? (($container === 'container-xxl') ? "layou
   <!-- Canonical SEO -->
   <link rel="canonical" href="{{ config('variables.productPage') ? config('variables.productPage') : '' }}">
   <!-- Favicon -->
-  <link rel="icon" type="image/x-icon" href="{{ asset('assets/img/creamoda/logoCreamoda.png') }}" />
+  <link rel="icon" type="image/x-icon" href="{{ asset('assets/img/creamoda/logoIL.jpeg') }}" />
 
 
 

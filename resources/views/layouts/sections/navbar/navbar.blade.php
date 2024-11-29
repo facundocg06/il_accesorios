@@ -21,7 +21,7 @@
     <div class="navbar-brand app-brand demo d-none d-xl-flex py-0 me-4">
         <a href="{{ url('/') }}" class="app-brand-link gap-2">
             <span class="app-brand-logo demo">
-                <img src="{{ asset('assets/img/creamoda/logoCreamoda.png') }}" alt="logo-creamoda" class="w-100">
+                <img src="{{ asset('assets/img/il_accesorios/logoIL.jpeg') }}" alt="logo-il_accesorios" class="w-100">
             </span>
             <span class="app-brand-text demo menu-text fw-bold">{{ config('variables.templateName') }}</span>
         </a>
@@ -178,7 +178,7 @@
         <li class="nav-item navbar-dropdown dropdown-user dropdown">
             <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
                 <div class="avatar avatar-online">
-                    <img src="{{ asset('assets/img/creamoda/logoUser.jpg') }}"
+                    <img src="{{ asset('assets/img/il_accesorios/logoUser.jpg') }}"
                         alt class="h-auto rounded-circle">
                 </div>
             </a>
@@ -189,7 +189,7 @@
                         <div class="d-flex">
                             <div class="flex-shrink-0 me-3">
                                 <div class="avatar avatar-online">
-                                    <img src="{{ asset('assets/img/creamoda/logoUser.jpg') }}"
+                                    <img src="{{ asset('assets/img/il_accesorios/logoUser.jpg') }}"
                                         alt class="h-auto rounded-circle">
                                 </div>
                             </div>

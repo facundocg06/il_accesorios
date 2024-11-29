@@ -16,7 +16,7 @@ $activeClass = in_array($currentRouteName, $activeRoutes) ? 'active' : '';
         <!-- Mobile menu toggle: End-->
         <a href="{{url('front-pages/landing')}}" class="app-brand-link">
           <span class="app-brand-logo demo">
-            <img src="{{asset('assets/img/creamoda/logoCreamoda.png')}}" alt="logo-creamoda" class="w-100"></span>
+            <img src="{{asset('assets/img/il_accesorios/logoIL.jpeg')}}" alt="logo-il_accesorios" class="w-100"></span>
           <span class="app-brand-text demo menu-text fw-bold ms-2 ps-1">{{ config('variables.templateName') }}</span>
         </a>
       </div>

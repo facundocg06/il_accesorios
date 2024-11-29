@@ -7,8 +7,8 @@
                     class="d-flex justify-content-between flex-xl-row flex-md-column flex-sm-row flex-column m-sm-3 m-0">
                     <div class="mb-xl-0 mb-4">
                         <div class="d-flex svg-illustration mb-4 gap-2 align-items-center">
-                            <div class=""><img src="{{ asset('assets/img/creamoda/logoCreamoda.png') }}"
-                                    class="w-50 h-100" alt="logo-creamoda"></div>
+                            <div class=""><img src="{{ asset('assets/img/il_accesorios/logoIL.jpeg') }}"
+                                    class="w-50 h-100" alt="logo-il_accesorios"></div>
                         </div>
                     </div>
                     <div>

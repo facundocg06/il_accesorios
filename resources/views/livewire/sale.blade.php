@@ -8,8 +8,8 @@
                     <div class="row m-sm-4 m-0">
                         <div class="col-md-7 mb-md-0 mb-4 ps-0">
                             <div class="d-flex svg-illustration mb-4 gap-2 align-items-center">
-                                <div class=""><img src="{{ asset('assets/img/creamoda/logoCreamoda.png') }}"
-                                        class="w-50 h-100" alt="logo-creamoda"></div>
+                                <div class=""><img src="{{ asset('assets/img/il_accesorios/logoIL.jpeg') }}"
+                                        class="w-50 h-100" alt="logo-il_accesorios"></div>
                             </div>
                         </div>
                         <div class="col-md-5">

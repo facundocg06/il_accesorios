@@ -1,6 +1,6 @@
 @extends('layouts/layoutMaster')
 
-@section('title', 'Registrar Venta CREAMODA')
+@section('title', 'Registrar Venta IL Accesorios')
 
 @section('vendor-style')
 @vite('resources/assets/vendor/libs/flatpickr/flatpickr.scss')

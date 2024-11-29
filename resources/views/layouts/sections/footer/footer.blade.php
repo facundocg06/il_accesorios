@@ -13,7 +13,7 @@
                 ©
                 <script>
                     document.write(new Date().getFullYear())
-                </script>, hecho por Estudiantes de la FICCT
+                </script>, hecho por el Grupo 19
             </div>
             <div class="d-none d-lg-inline-block">
                 {{-- Ejemplo de cómo mostrar el contador de visitas --}}

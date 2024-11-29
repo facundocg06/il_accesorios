@@ -20,7 +20,7 @@
 
 @section('content')
     <h4 class="py-3 mb-2">
-        <span class="text-muted fw-light">CREAMODA /</span> Lista de Almacenes
+        <span class="text-muted fw-light">IL Accesorios /</span> Lista de Almacenes
     </h4>
 
     <div class="app-ecommerce-store">
