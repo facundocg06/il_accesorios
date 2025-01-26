@@ -12,4 +12,5 @@ interface SaleRepositoryInterface
     public function createSale(array $data);
     public function createSaleDetail(array $data);
     public function confirmSale($sale);
+    public function getSalesBetweenDates($startDate, $endDate);
 }

@@ -8,14 +8,17 @@ use App\Models\SaleDetail;
 
 class SaleRepository implements SaleRepositoryInterface
 {
-    public function all(){
+    public function all()
+    {
         return SaleNote::all();
     }
-    public function find($id){
+    public function find($id)
+    {
         return SaleNote::find($id);
     }
     public function createSale(array $data)
     {
+
         return SaleNote::create([
             'customer_id' => $data['customer_id'],
             'sale_date' => $data['sale_date'],
@@ -34,8 +37,16 @@ class SaleRepository implements SaleRepositoryInterface
             'subtotal_price' => $data['subtotal_price'],
         ]);
     }
-    public function confirmSale($sale){
+    public function confirmSale($sale)
+    {
         $sale->sale_state = 'PAGADO';
         $sale->save();
+    }
+
+    public function getSalesBetweenDates($startDate, $endDate)
+    {
+        return SaleNote::whereBetween('sale_date', [$startDate, $endDate])
+            ->orderByDesc('sale_date')
+            ->get();
     }
 }

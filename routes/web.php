@@ -74,7 +74,9 @@ Route::middleware('auth')->group(function () {
     Route::put('/sales/confirm-sale/{id_sale}', [SaleController::class, 'confirm_sale'])->name('confirm-sale');
 
 
-
+    Route::get('/date-reports', [SaleController::class, 'salesReportForm'])->name('reports.ventas.form');
+    Route::post('/generate', [SaleController::class, 'generateSalesReport'])->name('reports.ventas.generate');
+    Route::post('/email', [SaleController::class, 'sendSalesReport'])->name('reports.ventas.email');
     /* -----------------------------------------USERS------------------------------------------------- */
     Route::get('user/user-list', [UserController::class, 'user_list'])->name('user-list');
     Route::post('user/user-add', [UserController::class, 'register_user'])->name('user-add');
