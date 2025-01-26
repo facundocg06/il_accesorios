@@ -20,20 +20,23 @@ class SaleNote extends Model
         'created_by',
         'updated_by',
     ];
-    public function customer(){
-        return $this->belongsTo(Customer::class,'customer_id','id');
+
+    public function customer()
+    {
+        return $this->belongsTo(Customer::class, 'customer_id', 'id');
     }
     public function stockSales()
     {
         return $this->belongsToMany(StockSales::class, 'sale_details')
-                    ->withPivot('unitsale_price', 'amount', 'subtotal_price')
-                    ->withTimestamps();
+            ->withPivot('unitsale_price', 'amount', 'subtotal_price')
+            ->withTimestamps();
     }
     public function details()
     {
         return $this->hasMany(SaleDetail::class, 'sale_note_id');
     }
-    public function qrPayment(){
-        return $this->hasOne(QRPayment::class,'sale_note_id','id');
+    public function qrPayment()
+    {
+        return $this->hasOne(QRPayment::class, 'sale_note_id', 'id');
     }
 }

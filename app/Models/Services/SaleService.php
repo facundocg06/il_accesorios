@@ -13,7 +13,7 @@ class SaleService
     protected $customerRepository;
     protected $stockSaleRepository;
 
-    public function __construct(SaleRepositoryInterface $saleRepository,CustomerRepositoryInterface $customerRepositoryInterface,StockSalesRepositoryInterface $stockSaleRepository)
+    public function __construct(SaleRepositoryInterface $saleRepository, CustomerRepositoryInterface $customerRepositoryInterface, StockSalesRepositoryInterface $stockSaleRepository)
     {
         $this->saleRepository = $saleRepository;
         $this->customerRepository = $customerRepositoryInterface;
@@ -30,13 +30,13 @@ class SaleService
         return DB::transaction(function () use ($data) {
             // Generar datos para la venta y detalles de venta
             $customer = $this->customerRepository->findByCI($data['ci_customer']);
-            if(!$customer){
+            if (!$customer) {
                 //Aqui vooy a registrar al customer
                 $customer = $this->customerRepository->create([
                     'ci_customer' => $data['ci_customer'],
                     'name_customer' => $data['name_customer'],
-                    'phone_customer' => $data['phone_customer']?:null,
-                    'email_customer' => $data['email_customer']?:null,
+                    'phone_customer' => $data['phone_customer'] ?: null,
+                    'email_customer' => $data['email_customer'] ?: null,
                 ]);
             }
             $saleData = $this->generateDataCreateSale($data);
@@ -61,7 +61,7 @@ class SaleService
                     'subtotal_price' => $salesNote['subtotal_price'],
                 ]);
                 //Despues de registrar aqui Descontar ese producto
-                $this->stockSaleRepository->updateStock($salesNote['stock_sale_id'],$salesNote['amount']);
+                $this->stockSaleRepository->updateStock($salesNote['stock_sale_id'], $salesNote['amount']);
             }
 
             return $sale; // Devolver la venta creada
@@ -89,10 +89,42 @@ class SaleService
             'salesNotes' => $salesNotes,
         ];
     }
-    public function confirmSale($id_sale){
+    public function confirmSale($id_sale)
+    {
         return DB::transaction(function () use ($id_sale) {
             $sale = $this->saleRepository->find($id_sale);
             $this->saleRepository->confirmSale($sale);
         });
+    }
+    public function getSalesBetweenDates($startDate, $endDate)
+    {
+        return $this->saleRepository->getSalesBetweenDates($startDate, $endDate);
+    }
+
+    // Generar archivo CSV
+
+
+    public function generateSalesReport($sales, $startDate, $endDate)
+    {
+        $fileName = 'sales_report_' . now()->format('YmdHis') . '.csv';
+        $filePath = storage_path('app/' . $fileName);
+
+        $file = fopen($filePath, 'w');
+        fputcsv($file, ['ID', 'Cliente', 'Fecha de Venta', 'Cantidad Total', 'Estado de Venta', 'Método de Pago']);
+
+        foreach ($sales as $sale) {
+            fputcsv($file, [
+                $sale->id,
+                $sale->customer->name,
+                $sale->sale_date,
+                $sale->total_quantity,
+                $sale->sale_state,
+                $sale->payment_method,
+            ]);
+        }
+
+        fclose($file);
+
+        return $filePath;
     }
 }
