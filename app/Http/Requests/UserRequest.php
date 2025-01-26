@@ -3,6 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rules\Password;
+
 
 class UserRequest extends FormRequest
 {
@@ -25,7 +27,7 @@ class UserRequest extends FormRequest
             'name' => 'required|string|max:255',
             'lastname' => 'required|string|max:255',
             'email' => 'required|string|email|max:255',
-            'password' => 'required|string|min:6',
+            'password' => ['required',Password::min(8)->mixedCase()->numbers()->symbols(),],
             'phone' => 'required',
             'rolType' => 'required'
         ];
@@ -46,7 +48,10 @@ class UserRequest extends FormRequest
             'email.unique' => 'Este correo electrónico ya está registrado.',
             'password.required' => 'La contraseña es obligatoria.',
             'password.string' => 'La contraseña debe ser una cadena de caracteres.',
-            'password.min' => 'La contraseña debe tener al menos 6 caracteres.',
+            'password.min' => 'La contraseña debe tener al menos 8 caracteres.',
+            'password.mixedCase' => 'La contraseña debe incluir letras mayúsculas y minúsculas.',
+            'password.numbers' => 'La contraseña debe incluir al menos un número.',
+            'password.symbols' => 'La contraseña debe incluir al menos un carácter especial.',            
             'phone.required' => 'El número de teléfono es obligatorio.',
             'rolType.required' => 'El rol del usuario es obligatorio.',
         ];
