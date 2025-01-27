@@ -1,43 +1,50 @@
-# Imagen base con PHP 8.2 y Node.js para frontend
-FROM php:8.2-fpm
+FROM php:8.3.7-fpm-alpine
 
-# Instalar dependencias del sistema y extensiones de PHP
-RUN apt-get update && apt-get install -y \
-    git \
-    unzip \
-    curl \
-    libpng-dev \
-    libjpeg-dev \
-    libfreetype6-dev \
-    libonig-dev \
-    libxml2-dev \
-    libzip-dev \
-    zip \
-    nodejs \
-    npm \
-    && docker-php-ext-install pdo_mysql mbstring exif bcmath gd zip \
-    && apt-get clean
+RUN apk add --no-cache linux-headers
+RUN apk --no-cache upgrade && \
+    apk --no-cache add bash git sudo openssh libxml2-dev oniguruma-dev autoconf gcc g++ make npm \
+    freetype-dev libjpeg-turbo-dev libpng-dev libzip-dev ssmtp postgresql-dev
+
+# PHP: Install php extensions
+RUN pecl channel-update pecl.php.net
+RUN pecl install pcov swoole
+
+# Configurar y instalar extensiones PHP
+RUN docker-php-ext-configure gd --with-freetype --with-jpeg
+RUN docker-php-ext-install mbstring xml pcntl gd zip sockets bcmath soap pgsql pdo pdo_pgsql
+RUN docker-php-ext-enable mbstring xml gd zip pcov pcntl sockets bcmath soap swoole pgsql pdo pdo_pgsql
+
+# Instalar extensión intl
+RUN apk add icu-dev
+RUN docker-php-ext-configure intl && docker-php-ext-install intl
 
 # Instalar Composer
-COPY --from=composer:2.6 /usr/bin/composer /usr/bin/composer
+RUN curl -sS https://getcomposer.org/installer | php -- \
+     --install-dir=/usr/local/bin --filename=composer
 
-# Establecer el directorio de trabajo
-WORKDIR /var/www
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+COPY --from=spiralscout/roadrunner:2.4.2 /usr/bin/rr /usr/bin/rr
 
-# Copiar código fuente
+WORKDIR /app
 COPY . .
 
-# Instalar dependencias de Composer y npm
-RUN composer install --no-dev --optimize-autoloader \
+# Instalar dependencias
+RUN composer install
+RUN composer require laravel/octane spiral/roadrunner
+
+# Configurar entorno
+COPY .envDev .env
+RUN mkdir -p /app/storage/logs
+RUN chmod -R 775 storage bootstrap/cache
+RUN chown -R www-data:www-data storage bootstrap/cache
+
+# Instalar y construir assets
+RUN apk add --no-cache npm \
     && npm install \
     && npm run build
 
-# Establecer permisos para Laravel
-RUN chown -R www-data:www-data /var/www \
-    && chmod -R 775 /var/www/storage /var/www/bootstrap/cache
+# Configurar Octane
+RUN php artisan octane:install --server="swoole"
 
-# Exponer el puerto
-EXPOSE 9000
-
-# Comando de inicio
-CMD ["php-fpm"]
+CMD php artisan octane:start --server="swoole" --host="0.0.0.0"
+EXPOSE 8000
