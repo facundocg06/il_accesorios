@@ -15,7 +15,7 @@ use App\Http\Controllers\UserController;
 use App\Livewire\Product as ProductLivewire;
 use App\Models\StockProduction;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\StockSalesController;
 
 
 
@@ -58,6 +58,12 @@ Route::middleware('auth')->group(function () {
     Route::get('product/product-list', [ProductController::class, 'product_list'])->name('product-list');
     Route::delete('product/product-delete/{id}', [ProductController::class, 'delete_product'])->name('product-delete');
     Route::get('product/{id}/product-edit', [ProductController::class, 'product_edit'])->name('product-edit');
+
+
+    Route::put('stock/update', action: [StockSalesController::class, 'updateStock'])->name('updateStock');
+// Ruta para agregar stock
+Route::post('/add-stock', [StockSalesController::class, 'addStock'])->name('addStock');
+
 
 
     Route::get('/products', ProductLivewire::class)->name('products.index');

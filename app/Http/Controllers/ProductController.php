@@ -43,7 +43,12 @@ class ProductController extends Controller
     public function product_list(Request $request){
         $products = $this->productService->getAllProducts($request);
         $categories = $this->categoryService->getAll();
-        return view('content.product.product-list',compact('products','categories'));
+        $stores = $this->storeService->getAll();
+        $brands = $this->brandService->getAll();
+        $colors = $this->colorService->getAll();
+        $sizes = $this->sizeService->getAll();
+
+        return view('content.product.product-list',compact('products','categories','stores','brands','colors','sizes'));
     }
     public function register_product(ProductRequest $productRequest){
         try {

@@ -131,7 +131,7 @@
         <!-- /Second column -->
     </div>
 
-    @if (!$product_id)
+    @if ($product_id)
         <!-- Variants -->
         <div class="card mb-4">
             <div class="card-header">
