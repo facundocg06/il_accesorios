@@ -4,29 +4,58 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+    container_name: accesorios_app
     ports:
       - "8000:8000"
     depends_on:
       - postgres
     environment:
+      APP_ENV: production
+      APP_DEBUG: false
+      DB_CONNECTION: pgsql
       DB_HOST: postgres
       DB_PORT: 5432
       DB_DATABASE: db_accesorios
       DB_USERNAME: postgres
       DB_PASSWORD: 123456
+    volumes:
+      - ./storage:/app/storage
+      - ./bootstrap/cache:/app/bootstrap/cache
+    restart: unless-stopped
+    networks:
+      - accesorios_network
     command: >
       sh -c "
-      php artisan config:cache &&
-      php artisan migrate --force &&
-      php artisan db:seed --force &&
-      php artisan octane:start --server=swoole --host=0.0.0.0
+        php artisan config:cache &&
+        php artisan migrate --force &&
+        php artisan db:seed --force &&
+        php artisan octane:start --server=swoole --host=0.0.0.0 --workers=2 --task-workers=1
       "
 
   postgres:
     image: postgres:latest
+    container_name: accesorios_db
     environment:
       POSTGRES_DB: db_accesorios
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: 123456
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
     ports:
       - "5432:5432"
+    restart: unless-stopped
+    networks:
+      - accesorios_network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  postgres_data:
+    name: accesorios_postgres_data
+
+networks:
+  accesorios_network:
+    driver: bridge
