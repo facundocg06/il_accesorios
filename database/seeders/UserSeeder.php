@@ -33,15 +33,15 @@ class UserSeeder extends Seeder
             'last_name' => 'fisher',
             'phone' => '78198215',
         ]);
-        $user->assignRole('Administrador');
+        $user->assignRole('Vendedor');
 
         $user = User::create([
-            'username' => 'ivana',
-            'email' => 'ivana@gmail.com',
-            'password' => Hash::make('123456789'),
-            'first_name' => 'ivana',
-            'last_name' => 'ivana',
-            'phone' => '73666238',
+            'username' => 'Facundo',
+            'email' => 'facundocuellarg@gmail.com',
+            'password' => Hash::make('Facu2806#'),
+            'first_name' => 'Facundo',
+            'last_name' => 'Cuellar',
+            'phone' => '76653572',
         ]);
         $user->assignRole('Administrador');
     }
