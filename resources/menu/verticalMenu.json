@@ -1,0 +1,91 @@
+{
+    "menu": [
+        {
+            "name": "Inicio",
+            "icon": "menu-icon tf-icons ti ti-home",
+            "slug": "home",
+            "submenu": [
+                {
+                    "url": "/",
+                    "name": "Reportes Insumos",
+                    "slug": "Reportes-Insumos"
+                },
+                {
+                    "url": "/ventas-reportes",
+                    "name": "Reportes Ventas",
+                    "slug": "ventas-reportes"
+                },
+                {
+                    "url": "/date-reports",
+                    "name": "Reportes Ventas por Fechas",
+                    "slug": "ventas-reportes-fechas"
+                }
+            ],
+            "can": "Administrador"
+        },
+        {
+            "name": "Usuarios",
+            "icon": "menu-icon tf-icons ti ti-users",
+            "slug": "users",
+            "url": "user/user-list",
+            "can": "Administrador"
+        },
+        {
+            "name": "Inventario",
+            "icon": "menu-icon tf-icons ti ti-package",
+            "slug": "inventory",
+            "submenu": [
+                {
+                    "url": "category/category-list",
+                    "name": "Categorías",
+                    "slug": "category-list"
+                },
+                {
+                    "url": "product/product-list",
+                    "name": "Productos",
+                    "slug": "product-list"
+                }
+            ],
+            "can": "Administrador"
+        },
+        {
+            "name": "Clientes",
+            "icon": "menu-icon tf-icons ti ti-user",
+            "slug": "customer-list",
+            "url": "customer/customer-list",
+            "can": "Vendedor"
+        },
+        {
+            "name": "Proveedores",
+            "icon": "menu-icon tf-icons ti ti-truck",
+            "slug": "supplier-list",
+            "url": "supplier/supplier-list",
+            "can": "Vendedor"
+        },
+        {
+            "name": "Almacenes",
+            "icon": "menu-icon tf-icons ti ti-shopping-cart",
+            "slug": "store-list",
+            "url": "store/store-list",
+            "can": "Administrador"
+        },
+        {
+            "name": "Ventas",
+            "icon": "menu-icon tf-icons ti ti-shopping-cart",
+            "slug": "sales",
+            "submenu": [
+                {
+                    "url": "sales/sales-list",
+                    "name": "Mis Ventas",
+                    "slug": "sales-list"
+                },
+                {
+                    "url": "sales/sales-add",
+                    "name": "Registrar Venta",
+                    "slug": "sales-add"
+                }
+            ],
+            "can": "Vendedor"
+        }
+    ]
+}

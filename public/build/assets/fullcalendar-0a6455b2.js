@@ -1,0 +1,1 @@
+import{Calendar as i}from"@fullcalendar/core";import n from"@fullcalendar/daygrid";import r from"@fullcalendar/interaction";import o from"@fullcalendar/list";import t from"@fullcalendar/timegrid";try{window.Calendar=i,window.dayGridPlugin=n,window.interactionPlugin=r,window.listPlugin=o,window.timegridPlugin=t}catch{}

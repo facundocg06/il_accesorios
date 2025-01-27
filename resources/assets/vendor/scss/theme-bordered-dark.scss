@@ -1,0 +1,328 @@
+@import './_components/include-dark';
+@import './_theme/common';
+@import './_theme/libs';
+@import './_theme/pages';
+@import './_theme/_theme';
+
+// Colores principales para modo oscuro amigable para niños
+$primary-color: #4c074d; // Un color primario oscuro y cálido
+$background-color: #5b3a76; // Un color de fondo oscuro, profundo y neutral
+$card-bg: #18051d; // Un fondo de tarjetas oscuro ligeramente más claro que el fondo principal para crear un contraste sutil
+$body-color: #e0e0e0; // Un color claro para el texto para asegurar buena legibilidad
+$border-color: #3e3e4f; // Un color de bordes oscuros que se complementa bien con los fondos
+$headings-color: #ffffff; // Un color suave y claro para los encabezados que ofrece un buen contraste con los fondos oscuros
+$text-muted: #888888; // Un color gris medio para el texto desactivado o secundario
+
+
+body {
+  background: linear-gradient(180deg, $card-bg 0%, #5b3a76 100%);
+  font-family: 'Dancing Script', cursive;
+  color: $body-color;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden; /* Evita el scroll horizontal */
+}
+
+.bg-body {
+  background: $background-color !important;
+}
+
+.dropdown-menu,
+.popover,
+.toast,
+.flatpickr-calendar,
+.datepicker.datepicker-inline,
+.datepicker.datepicker-inline table,
+.daterangepicker,
+.pcr-app,
+.ui-timepicker-wrapper,
+.twitter-typeahead .tt-menu,
+// .tagify__dropdown,
+.swal2-popup,
+.select2-dropdown,
+.menu-horizontal .menu-inner > .menu-item.open .menu-sub,
+div.dataTables_wrapper .dt-button-collection {
+  outline: none;
+  box-shadow: none !important;
+  border: 1px solid $border-color !important;
+  background-color: $card-bg; // Fondo de los menús en modo oscuro
+  color: $body-color; // Texto claro
+}
+
+.flatpickr-days,
+.flatpickr-time {
+  border-width: 0 !important;
+  background-color: $background-color; // Fondo de calendario en modo oscuro
+  color: $body-color; // Texto claro
+}
+
+// Bootstrap select > double border fix
+.dropdown-menu .dropdown-menu {
+  border: none !important;
+}
+.datepicker.datepicker-inline {
+  width: fit-content;
+  border-radius: $border-radius;
+  background-color: $card-bg; // Fondo de calendario en modo oscuro
+  color: $body-color; // Texto claro
+}
+.modal-content,
+.offcanvas,
+// .shepherd-element,
+div.dataTables_wrapper .dt-button-collection > div[role='menu'] {
+  box-shadow: none !important;
+  background-color: $card-bg; // Fondo de modales en modo oscuro
+  color: $body-color; // Texto claro
+}
+.select2-dropdown {
+  border-color: $border-color !important;
+  background-color: $card-bg; // Fondo de dropdown en modo oscuro
+  color: $body-color; // Texto claro
+}
+.bs-popover-start > .popover-arrow::before,
+.bs-popover-auto[data-popper-placement^='left'] > .popover-arrow::before {
+  border-left-color: $border-color !important;
+  right: -1px;
+}
+.bs-popover-end > .popover-arrow::before,
+.bs-popover-auto[data-popper-placement^='right'] > .popover-arrow::before {
+  border-right-color: $border-color !important;
+  left: -1px;
+}
+.bs-popover-top > .popover-arrow::before,
+.bs-popover-auto[data-popper-placement^='top'] > .popover-arrow::before {
+  border-top-color: $border-color !important;
+  bottom: -1px;
+}
+.bs-popover-bottom > .popover-arrow::before,
+.bs-popover-auto[data-popper-placement^='bottom'] > .popover-arrow::before {
+  border-bottom-color: $border-color !important;
+  top: -1px;
+}
+
+@include template-common-theme($primary-color);
+@include template-libs-dark-theme($primary-color);
+@include template-pages-theme($primary-color);
+
+// Navbar
+// ---------------------------------------------------------------------------
+@include template-navbar-style('.bg-navbar-theme', $background-color, $color: $body-color, $active-color: $headings-color);
+.layout-navbar,
+.menu-horizontal {
+  backdrop-filter: saturate(200%) blur(6px);
+}
+.navbar-detached {
+  border: 1px solid $border-color;
+  box-shadow: none;
+}
+.layout-navbar-fixed .layout-page:before {
+  backdrop-filter: saturate(200%) blur(10px);
+  background: linear-gradient(180deg, rgba($background-color, 70%) 44%, rgba($background-color, 43%) 73%, rgba($background-color, 0%));
+  -webkit-mask: linear-gradient($background-color, $background-color 18%, transparent 100%);
+  mask: linear-gradient($background-color, $background-color 18%, transparent 100%);
+}
+.layout-horizontal .layout-navbar {
+  box-shadow: 0 1px 0 $border-color;
+}
+
+// Menu
+// ---------------------------------------------------------------------------
+@include template-menu-style(
+  '.bg-menu-theme',
+  $card-bg,
+  $color: $body-color,
+  $active-color: $headings-color,
+  $active-bg: $primary-color
+);
+
+.bg-menu-theme {
+  .menu-inner {
+    .menu-item {
+      &.open,
+      &.active {
+        > .menu-link.menu-toggle {
+          &,
+          .layout-menu-hover.layout-menu-collapsed & {
+            background: rgba($base, 0.06);
+          }
+        }
+      }
+      &:not(.active) > .menu-link:hover {
+        html:not(.layout-menu-collapsed) &,
+        .layout-menu-hover.layout-menu-collapsed & {
+          background: rgba($base, 0.06);
+        }
+      }
+    }
+  }
+  .menu-inner .menu-sub .menu-item:not(.active) > .menu-link::before {
+    color: $text-muted !important;
+  }
+}
+
+@include media-breakpoint-up($menu-collapsed-layout-breakpoint) {
+  .layout-menu {
+    box-shadow: 0 0 0 1px $border-color;
+  }
+}
+
+.layout-menu-horizontal {
+  box-shadow: 0 -1px 0 $border-color inset;
+}
+
+// Footer
+// ---------------------------------------------------------------------------
+@include template-footer-style('.bg-footer-theme', $background-color, $color: $body-color, $active-color: $headings-color);
+
+.content-footer .footer-container {
+  .layout-footer-fixed .layout-wrapper:not(.layout-horizontal) & {
+    border: 1px solid $border-color;
+    border-bottom: 0;
+  }
+}
+.content-footer {
+  .layout-horizontal & {
+    border-top: 1px solid $border-color;
+  }
+}
+
+// Component styles
+// ---------------------------------------------------------------------------
+
+// card
+.card {
+  box-shadow: none;
+  border: $border-width solid $card-border-color;
+  background-color: $card-bg; // Fondo de tarjetas en modo oscuro
+  color: $body-color; // Texto claro
+}
+
+// card border-shadow variant
+.card {
+  &[class*='card-border-shadow-'] {
+    &:hover {
+      box-shadow: none !important;
+    }
+  }
+}
+
+// Accordion
+.accordion:not(.accordion-bordered) {
+  .accordion-item {
+    border-top: 1px solid $card-border-color;
+    box-shadow: none !important;
+  }
+}
+
+// Tabs
+.nav-tabs-shadow {
+  box-shadow: none !important;
+  border: 1px solid $border-color !important;
+  border-radius: $border-radius;
+}
+.nav-pills:not(.card-header-pills) {
+  ~ .tab-content {
+    border: 1px solid $border-color !important;
+    @include border-radius($border-radius);
+    box-shadow: none;
+    background-color: $card-bg; // Fondo de contenido de pestañas en modo oscuro
+    color: $body-color; // Texto claro
+  }
+}
+.nav-align-top .nav-tabs {
+  @include border-top-radius($border-radius);
+  ~ .tab-content {
+    border-top-width: 0 !important;
+    @include border-bottom-radius($border-radius);
+  }
+}
+.nav-align-bottom .nav-tabs {
+  @include border-bottom-radius($border-radius);
+  ~ .tab-content {
+    border-bottom-width: 0 !important;
+    @include border-top-radius($border-radius);
+  }
+}
+.nav-align-left .nav-tabs {
+  @include ltr-style {
+    @include border-start-radius($border-radius);
+  }
+  @include rtl-style {
+    @include border-end-radius($border-radius);
+  }
+  ~ .tab-content {
+    @include ltr-style {
+      border-left-width: 0 !important;
+      @include border-end-radius($border-radius);
+    }
+    @include rtl-style {
+      border-right-width: 0 !important;
+      @include border-start-radius($border-radius);
+    }
+  }
+}
+.nav-align-right .nav-tabs {
+  @include ltr-style {
+    @include border-end-radius($border-radius);
+  }
+  @include rtl-style {
+    @include border-start-radius($border-radius);
+  }
+  ~ .tab-content {
+    @include ltr-style {
+      border-right-width: 0 !important;
+      @include border-start-radius($border-radius);
+    }
+    @include rtl-style {
+      border-left-width: 0 !important;
+      @include border-end-radius($border-radius);
+    }
+  }
+}
+
+//Kanban-item
+.kanban-item {
+  box-shadow: none !important;
+  border: $border-width solid $card-border-color;
+  background-color: $card-bg; // Fondo de elementos Kanban en modo oscuro
+  color: $body-color; // Texto claro
+}
+
+// default form wizard style
+
+.bs-stepper:not(.wizard-modern) {
+  box-shadow: none !important;
+  border: 1px solid $border-color;
+}
+
+// Toaster
+.toast {
+  box-shadow: none !important;
+  border: $border-width solid $border-color;
+  background-color: $card-bg; // Fondo de toast en modo oscuro
+  color: $body-color; // Texto claro
+}
+
+// pagination
+.page-item.active .page-link {
+  background-color: $primary-color;
+}
+.pagination-lg .page-link,
+.page-item:first-child .page-link {
+  @include border-start-radius($border-radius);
+}
+.pagination-lg .page-link,
+.page-item:last-child .page-link {
+  @include border-end-radius($border-radius);
+}
+.pagination-lg .page-link {
+  padding: 0.5rem 1.5rem;
+}
+.pagination-sm .page-link {
+  padding: 0.25rem 0.75rem;
+}
+
+// swiper shadow remove
+.swiper-wrapper {
+  box-shadow: none !important;
+}
