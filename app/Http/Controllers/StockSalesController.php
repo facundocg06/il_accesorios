@@ -17,8 +17,8 @@ class StockSalesController extends Controller
         $products = Product::all();
         $stores = Store::all();
 
-
         return view('stock_sales.create', compact('products', 'stores'));
+
     }
 
     // Guardar un nuevo StockSale
@@ -50,8 +50,8 @@ class StockSalesController extends Controller
         $products = Product::all();
         $stores = Store::all();
 
-
         return view('stock_sales.edit', compact('stockSale', 'products', 'stores'));
+
     }
 
     // Actualizar un StockSale existente
@@ -113,7 +113,9 @@ class StockSalesController extends Controller
             'store_id' => 'required|exists:stores,id',  // La tienda debe existir
             'quantity' => 'required|integer|min:1',  // Cantidad debe ser un número entero positivo
 
+
         ]);
+
 
         // Crear un nuevo registro de StockSales con todos los campos
         StockSales::create([
@@ -127,4 +129,14 @@ class StockSalesController extends Controller
         // Redirigir con un mensaje de éxito
         return redirect()->route('product-list')->with('success', 'Stock agregado correctamente.');
     }
+            'color_id' => $request->color_id,  // El color seleccionado
+            'size_id' => $request->size_id,  // El tamaño seleccionado
+            'created_by' => auth()->id(),  // El ID del usuario que crea el registro
+            'updated_by' => auth()->id(),  // El ID del usuario que actualiza el registro
+        ]);
+    
+        // Redirigir con un mensaje de éxito
+        return redirect()->route('product-list')->with('success', 'Stock agregado correctamente.');
+    }   
+
 }

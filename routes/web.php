@@ -16,7 +16,9 @@ use App\Livewire\Product as ProductLivewire;
 use App\Models\StockProduction;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StockSalesController;
+
 use App\Http\Controllers\InventoryAdjustmentController;
+
 
 
 
@@ -62,8 +64,13 @@ Route::middleware('auth')->group(function () {
 
 
     Route::put('stock/update', action: [StockSalesController::class, 'updateStock'])->name('updateStock');
+
     // Ruta para agregar stock
     Route::post('/add-stock', [StockSalesController::class, 'addStock'])->name('addStock');
+
+    // Ruta para agregar stock
+    Route::post('/add-stock', [StockSalesController::class, 'addStock'])->name('addStock');
+
 
 
 
