@@ -12,17 +12,17 @@
 
 @section('vendor-script')
 @vite([
-  'resources/assets/vendor/libs/flatpickr/flatpickr.js',
-  'resources/assets/vendor/libs/cleavejs/cleave.js',
-  'resources/assets/vendor/libs/cleavejs/cleave-phone.js',
-  'resources/assets/vendor/libs/jquery-repeater/jquery-repeater.js'
+'resources/assets/vendor/libs/flatpickr/flatpickr.js',
+'resources/assets/vendor/libs/cleavejs/cleave.js',
+'resources/assets/vendor/libs/cleavejs/cleave-phone.js',
+'resources/assets/vendor/libs/jquery-repeater/jquery-repeater.js'
 ])
 @endsection
 
 @section('page-script')
 @vite([
-  'resources/assets/js/offcanvas-send-invoice.js',
-  'resources/assets/js/app-invoice-add.js'
+'resources/assets/js/offcanvas-send-invoice.js',
+'resources/assets/js/app-invoice-add.js'
 ])
 @endsection
 

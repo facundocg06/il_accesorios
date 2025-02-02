@@ -52,13 +52,20 @@
                             <div class="repeater-wrapper pt-0 pt-md-4" data-repeater-item>
                                 <div class="d-flex border rounded position-relative pe-0">
                                     <div class="row w-100 p-3">
-                                        <div wire:ignore class="col-md-6 col-12 mb-md-0 mb-3">
+                                        <div wire:ignore class="col-md-4 col-12 mb-md-0 mb-3">
                                             <p class="mb-2 repeater-title">Item</p>
-
                                             <input class="form-control mb-3 product" name="item" id="item-0"
                                                 type="text" placeholder="Select product">
                                             <input type="hidden" class="variety" name="variety_id" id="variety-0">
-
+                                        </div>
+                                        <div class="col-md-2 col-12 mb-md-0 mb-3">
+                                            <p class="mb-2 repeater-title">Tienda</p>
+                                            <select class="form-select mb-3 store-select" name="store_id" id="store-0">
+                                                <option value="">Seleccionar tienda</option>
+                                                @foreach($stores as $store)
+                                                <option value="{{ $store->id }}">{{ $store->name }}</option>
+                                                @endforeach
+                                            </select>
                                         </div>
 
                                         <div class="col-md-2 col-12 mb-md-0 mb-3">
@@ -66,6 +73,7 @@
                                             <input type="text" class="form-control invoice-item-price mb-3 price"
                                                 name="price" id="price-0" value="0" placeholder="00"
                                                 onchange="calculateSubtotal(0)" />
+
                                             <div>
                                                 <span>Descuento:</span>
                                                 <span class="discount me-2">0%</span>
@@ -183,183 +191,189 @@
 
         <!-- /Invoice Actions -->
         @push('scripts')
-            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-            <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/corejs-typeahead/1.3.1/typeahead.bundle.min.js"></script>
-            <script>
-                $(document).ready(function() {
-                    var products =
-                        @json($products); // Pasar los productos desde el componente Livewire a JavaScript
-                    console.log(products)
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/corejs-typeahead/1.3.1/typeahead.bundle.min.js"></script>
+        <script>
+            $(document).ready(function() {
+                var products = @json($products);
+                console.log(products);
 
-                    // Configurar Bloodhound para manejar la fuente de datos
-                    var productBloodhound = new Bloodhound({
-                        datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name', 'barcode'),
-                        queryTokenizer: Bloodhound.tokenizers.whitespace,
-                        local: products.map(function(product) {
-                            return {
-                                id: product.id,
-                                name: product.name,
-                                size: product.size,
-                                color: product.color,
-                                barcode: product.barcode,
-                                price: product.price,
-                                quantity: product.quantity,
-                            };
-                        })
-                    });
-
-                    var itemCounter = 0;
-
-                    // Función para inicializar Typeahead en un elemento dado
-                    function initializeTypeahead(element) {
-                        var inputId = 'typeahead-' + itemCounter; // Generar un ID único para Typeahead
-
-                        $(element).typeahead({
-                            hint: true,
-                            highlight: true,
-                            minLength: 1
-                        }, {
-                            name: inputId,
-                            display: function(item) {
-                                return item.name; // Mostrar solo el nombre en el campo de entrada
-                            },
-                            source: productBloodhound,
-                            templates: {
-                                suggestion: function(data) {
-                                    return '<div>' + data.name + ' - ' + data.size + ' - ' + data.color +
-                                        '</div>'; // Mostrar nombre, talla y color en las sugerencias
-                                }
-                            }
-                        }).on('typeahead:select', function(event, selection) {
-                            console.log('Selected value:', selection);
-                            console.log(itemCounter);
-                            $(element).typeahead('val', selection.name + ' - ' + selection.size + ' - ' + selection
-                                .color);
-                            $('#price-' + itemCounter).val(selection.price);
-                            $('#variety-' + itemCounter).val(selection.id);
-                            calculateSubtotal(itemCounter);
-
-                        });
-                    }
-
-
-
-                    // Inicializar Typeahead para el primer elemento de la lista al cargar la página
-                    initializeTypeahead('.product');
-
-                    $('#myForm').on('click', '[data-repeater-create]', function() {
-                        // Obtener el último ítem añadido
-                        itemCounter++;
-                        var $lastItem = $('[data-repeater-item]:last');
-                        $lastItem.find('.product.tt-input').attr('id', 'item-' + itemCounter);
-                        $lastItem.find('.variety').attr('id', 'variety-' + itemCounter);
-
-                        $lastItem.find('.price').attr('id', 'price-' + itemCounter).attr('onchange',
-                            'calculateSubtotal(' + itemCounter + ')');
-                        $lastItem.find('.quantity').attr('id', 'quantity-' + itemCounter).attr('onchange',
-                            'calculateSubtotal(' + itemCounter + ')').val(1);
-                        $lastItem.find('.subtotal').attr('id', 'subtotal-' + itemCounter);
-                        var $inputInsideLastItem = $lastItem.find('.product.tt-input');
-                        console.log($inputInsideLastItem);
-                        // Inicializar Typeahead en el input específico encontrado
-                        initializeTypeahead($inputInsideLastItem);
-
-                    });
+                // Configurar Bloodhound para manejar la fuente de datos
+                var productBloodhound = new Bloodhound({
+                    datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name', 'barcode'),
+                    queryTokenizer: Bloodhound.tokenizers.whitespace,
+                    local: products.map(function(product) {
+                        return {
+                            id: product.id,
+                            name: product.name,
+                            barcode: product.barcode,
+                            price: product.price,
+                            quantity: product.quantity,
+                            stockSales: product.stock_sales || [] // Asegúrate de que este campo exista en tu JSON
+                        };
+                    })
                 });
-            </script>
-            <script>
-                // Initial function to calculate subtotal for each item
-                function calculateSubtotal(index) {
-                    var price = parseFloat(document.getElementById('price-' + index).value);
-                    var quantity = parseFloat(document.getElementById('quantity-' + index).value);
-                    var subtotal = price * quantity;
-                    document.getElementById('subtotal-' + index).textContent = subtotal.toFixed(2) + ' Bs.';
-                    calculateTotal();
+
+                var itemCounter = 0;
+
+                // Función para inicializar Typeahead en un elemento dado
+                function initializeTypeahead(element) {
+                    var inputId = 'typeahead-' + itemCounter;
+
+                    $(element).typeahead({
+                        hint: true,
+                        highlight: true,
+                        minLength: 1
+                    }, {
+                        name: inputId,
+                        display: function(item) {
+                            return item.name;
+                        },
+                        source: productBloodhound,
+                        templates: {
+                            suggestion: function(data) {
+                                let stockInfo = '';
+                                if (data.stockSales && data.stockSales.length > 0) {
+                                    stockInfo = data.stockSales.map(stock =>
+                                        `<small class="text-muted">${stock.store.name}: ${stock.quantity} unids.</small>`
+                                    ).join('<br>');
+                                }
+
+                                return `<div>
+                            <strong>${data.name}</strong><br>
+                            ${stockInfo}
+                        </div>`;
+                            }
+                        }
+                    }).on('typeahead:select', function(event, selection) {
+                        console.log('Selected value:', selection);
+                        console.log(itemCounter);
+                        $(element).typeahead('val', selection.name);
+                        $('#price-' + itemCounter).val(selection.price);
+                        $('#variety-' + itemCounter).val(selection.id);
+                        calculateSubtotal(itemCounter);
+                    });
                 }
 
-                // Function to calculate total
-                function calculateTotal() {
-                    var subtotals = document.querySelectorAll('.subtotal');
-                    var total = 0;
-                    subtotals.forEach(function(subtotal) {
-                        total += parseFloat(subtotal.textContent.replace(' Bs.', ''));
+
+
+
+                // Inicializar Typeahead para el primer elemento de la lista al cargar la página
+                initializeTypeahead('.product');
+
+                $('#myForm').on('click', '[data-repeater-create]', function() {
+                    // Obtener el último ítem añadido
+                    itemCounter++;
+                    var $lastItem = $('[data-repeater-item]:last');
+                    $lastItem.find('.product.tt-input').attr('id', 'item-' + itemCounter);
+                    $lastItem.find('.variety').attr('id', 'variety-' + itemCounter);
+
+                    $lastItem.find('.price').attr('id', 'price-' + itemCounter).attr('onchange',
+                        'calculateSubtotal(' + itemCounter + ')');
+                    $lastItem.find('.quantity').attr('id', 'quantity-' + itemCounter).attr('onchange',
+                        'calculateSubtotal(' + itemCounter + ')').val(1);
+                    $lastItem.find('.subtotal').attr('id', 'subtotal-' + itemCounter);
+                    var $inputInsideLastItem = $lastItem.find('.product.tt-input');
+                    console.log($inputInsideLastItem);
+                    // Inicializar Typeahead en el input específico encontrado
+                    initializeTypeahead($inputInsideLastItem);
+
+                });
+            });
+        </script>
+        <script>
+            // Initial function to calculate subtotal for each item
+            function calculateSubtotal(index) {
+                var price = parseFloat(document.getElementById('price-' + index).value);
+                var quantity = parseFloat(document.getElementById('quantity-' + index).value);
+                var subtotal = price * quantity;
+                document.getElementById('subtotal-' + index).textContent = subtotal.toFixed(2) + ' Bs.';
+                calculateTotal();
+            }
+
+            // Function to calculate total
+            function calculateTotal() {
+                var subtotals = document.querySelectorAll('.subtotal');
+                var total = 0;
+                subtotals.forEach(function(subtotal) {
+                    total += parseFloat(subtotal.textContent.replace(' Bs.', ''));
+                });
+                document.getElementById('invoiceSubtotal').textContent = total.toFixed(2) + ' Bs.';
+                document.getElementById('invoiceTotal').textContent = total.toFixed(2) + ' Bs.';
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+                document.querySelectorAll('.price, .quantity').forEach(function(input) {
+                    input.addEventListener('change', calculateTotal);
+                });
+
+                document.querySelector('.addItem').addEventListener('click', function() {
+                    setTimeout(function() {
+                        var newIndex = document.querySelectorAll('[data-repeater-item]').length - 1;
+                        document.getElementById('price-' + newIndex).addEventListener('change',
+                            function() {
+                                calculateSubtotal(newIndex);
+                            });
+                        document.getElementById('quantity-' + newIndex).addEventListener('change',
+                            function() {
+                                calculateSubtotal(newIndex);
+                            });
+                    }, 100);
+                });
+            });
+        </script>
+        <script>
+            $(document).ready(function() {
+                var customers = @json($customers);
+                console.log(customers);
+
+                var customersBloodhound = new Bloodhound({
+                    datumTokenizer: Bloodhound.tokenizers.obj.whitespace('ci_customer', 'name_customer'),
+                    queryTokenizer: Bloodhound.tokenizers.whitespace,
+                    local: customers.map(function(customer) {
+                        return {
+                            id: customer.id,
+                            ci_customer: customer.ci_customer,
+                            name_customer: customer.name_customer,
+                            phone_customer: customer.phone_customer,
+                            email_customer: customer.email_customer
+                        };
+                    })
+                });
+
+                // Función para inicializar Typeahead en el campo de cliente
+                function initializeCustomerTypeahead() {
+                    $('.customer').typeahead({
+                        hint: true,
+                        highlight: true,
+                        minLength: 1
+                    }, {
+                        name: 'customer',
+                        display: function(customer) {
+                            return customer.ci_customer + ' - ' + customer.name_customer;
+                        },
+                        source: customersBloodhound,
+                        templates: {
+                            suggestion: function(data) {
+                                return '<div>' + data.ci_customer + ' - ' + data.name_customer + '</div>';
+                            }
+                        }
+                    }).on('typeahead:select', function(event, selection) {
+                        console.log('Selected customer:', selection);
+                        // Setear los valores en los campos correspondientes
+                        $('.customer').typeahead('val', selection.ci_customer);
+
+                        $('#phone_customer').val(selection.phone_customer);
+                        $('#name_customer').val(selection.name_customer);
+                        $('#email_customer').val(selection.email_customer);
                     });
-                    document.getElementById('invoiceSubtotal').textContent = total.toFixed(2) + ' Bs.';
-                    document.getElementById('invoiceTotal').textContent = total.toFixed(2) + ' Bs.';
                 }
 
-                document.addEventListener('DOMContentLoaded', function() {
-                    document.querySelectorAll('.price, .quantity').forEach(function(input) {
-                        input.addEventListener('change', calculateTotal);
-                    });
-
-                    document.querySelector('.addItem').addEventListener('click', function() {
-                        setTimeout(function() {
-                            var newIndex = document.querySelectorAll('[data-repeater-item]').length - 1;
-                            document.getElementById('price-' + newIndex).addEventListener('change',
-                                function() {
-                                    calculateSubtotal(newIndex);
-                                });
-                            document.getElementById('quantity-' + newIndex).addEventListener('change',
-                                function() {
-                                    calculateSubtotal(newIndex);
-                                });
-                        }, 100);
-                    });
-                });
-            </script>
-            <script>
-                $(document).ready(function() {
-                    var customers = @json($customers);
-                    console.log(customers);
-
-                    var customersBloodhound = new Bloodhound({
-                        datumTokenizer: Bloodhound.tokenizers.obj.whitespace('ci_customer', 'name_customer'),
-                        queryTokenizer: Bloodhound.tokenizers.whitespace,
-                        local: customers.map(function(customer) {
-                            return {
-                                id: customer.id,
-                                ci_customer: customer.ci_customer,
-                                name_customer: customer.name_customer,
-                                phone_customer: customer.phone_customer,
-                                email_customer: customer.email_customer
-                            };
-                        })
-                    });
-
-                    // Función para inicializar Typeahead en el campo de cliente
-                    function initializeCustomerTypeahead() {
-                        $('.customer').typeahead({
-                            hint: true,
-                            highlight: true,
-                            minLength: 1
-                        }, {
-                            name: 'customer',
-                            display: function(customer) {
-                                return customer.ci_customer + ' - ' + customer.name_customer;
-                            },
-                            source: customersBloodhound,
-                            templates: {
-                                suggestion: function(data) {
-                                    return '<div>' + data.ci_customer + ' - ' + data.name_customer + '</div>';
-                                }
-                            }
-                        }).on('typeahead:select', function(event, selection) {
-                            console.log('Selected customer:', selection);
-                            // Setear los valores en los campos correspondientes
-                            $('.customer').typeahead('val', selection.ci_customer);
-
-                            $('#phone_customer').val(selection.phone_customer);
-                            $('#name_customer').val(selection.name_customer);
-                            $('#email_customer').val(selection.email_customer);
-                        });
-                    }
-
-                    // Inicializar Typeahead para el campo de cliente
-                    initializeCustomerTypeahead();
-                });
-            </script>
+                // Inicializar Typeahead para el campo de cliente
+                initializeCustomerTypeahead();
+            });
+        </script>
         @endpush
 
     </div>

@@ -16,16 +16,14 @@ class VarietyProductsResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'name'=> $this->product->name,
-            'price'=> $this->product->price,
-            'image'=> $this->product->image,
-            'description'=> $this->product->description,
-            'category'=> $this->product->category->name_category,
+            'name' => $this->product->name,
+            'price' => $this->product->price,
+            'image' => $this->product->image,
+            'description' => $this->product->description,
+            'category' => $this->product->category->name_category,
             'brand' => $this->product->brand->name,
-            'color' => $this->color->name,
-            'size' => $this->size->name,
             'quantity' => $this->quantity,
-            'barcode' =>$this->product->barcode,
+            'barcode' => $this->product->barcode,
         ];
     }
 }

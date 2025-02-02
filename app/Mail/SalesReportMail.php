@@ -11,21 +11,25 @@ use Illuminate\Queue\SerializesModels;
 
 class SalesReportMail extends Mailable
 {
-    public $filePath;
+    use Queueable, SerializesModels;
+
     public $startDate;
     public $endDate;
+    public $filePath;
+    public $emailSubject;
 
-    public function __construct($filePath, $startDate, $endDate)
+    public function __construct($startDate, $endDate, $filePath, $emailSubject)
     {
-        $this->filePath = $filePath;
         $this->startDate = $startDate;
         $this->endDate = $endDate;
+        $this->filePath = $filePath;
+        $this->emailSubject = $emailSubject;
     }
 
     public function build()
     {
         return $this->view('content.reports.sendReport')
-            ->subject("Reporte de Ventas del {$this->startDate} al {$this->endDate}")
+            ->subject($this->emailSubject) // Usamos la variable ya formateada
             ->attach($this->filePath, [
                 'as' => 'reporte_ventas.csv',
                 'mime' => 'text/csv',

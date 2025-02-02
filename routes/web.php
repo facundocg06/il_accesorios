@@ -15,7 +15,8 @@ use App\Http\Controllers\UserController;
 use App\Livewire\Product as ProductLivewire;
 use App\Models\StockProduction;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\StockSalesController;
+use App\Http\Controllers\InventoryAdjustmentController;
 
 
 
@@ -60,6 +61,12 @@ Route::middleware('auth')->group(function () {
     Route::get('product/{id}/product-edit', [ProductController::class, 'product_edit'])->name('product-edit');
 
 
+    Route::put('stock/update', action: [StockSalesController::class, 'updateStock'])->name('updateStock');
+    // Ruta para agregar stock
+    Route::post('/add-stock', [StockSalesController::class, 'addStock'])->name('addStock');
+
+
+
     Route::get('/products', ProductLivewire::class)->name('products.index');
     Route::get('/products/create', [ProductLivewire::class, 'create'])->name('products.create');
 
@@ -70,6 +77,7 @@ Route::middleware('auth')->group(function () {
     Route::post('sales/register-sale', [SaleController::class, 'register_sale'])->name('register-sale');
     Route::get('sales/sales-preview/{sale}/{requestData}', [SaleController::class, 'sales_preview'])->name('sales-preview');
     Route::get('/sales/sales-print', [SaleController::class, 'sales_print'])->name('sales-print');
+    Route::get('/get-products-by-store/{storeId}', [ProductController::class, 'getProductsByStore']);
 
     Route::put('/sales/confirm-sale/{id_sale}', [SaleController::class, 'confirm_sale'])->name('confirm-sale');
 
@@ -122,7 +130,10 @@ Route::middleware('auth')->group(function () {
 
     // Route::get('/get-supplier-by-nit', [SupplierController::class, 'getSupplierByNIT'])->name('get-supplier-by-nit');
     Route::get('/obtener-nit_supplier/{nit_supplier}', [PurchaseController::class, 'obtenernit_supplier'])->name('obtenernit_supplier');
+    //inventario
 
+    Route::get('/inventory-adjustments/create', [InventoryAdjustmentController::class, 'create'])->name('inventory-adjustments.create');
+    Route::post('/inventory-adjustments', [InventoryAdjustmentController::class, 'store'])->name('inventory-adjustments.store');
     /*------------------------------------------STORE -------------------------------------------------------- */
     route::get('store/store-list', [StorageController::class, 'store_list'])->name('store-list');
     route::post('store/store-add', [StorageController::class, 'register_store'])->name('store-add');
@@ -130,4 +141,10 @@ Route::middleware('auth')->group(function () {
     route::get('store/store-edit/{id}', [StorageController::class, 'edit_store']);
     route::put('store/store-update/{id}', [StorageController::class, 'update_store'])->name('store-update');
     /*------------------------------------------ //----// -------------------------------------------------------- */
+    Route::get('/reports/ventas/producto', [SaleController::class, 'salesReportByProductForm'])
+        ->name('reports.ventas.producto.form');
+
+    Route::post('/reports/ventas/producto/generate', [SaleController::class, 'generateSalesByProductReport'])
+        ->name('reports.ventas.producto.generate');
+    Route::post('/sendemail', [SaleController::class, 'sendSalesByProductReport'])->name('reports.ventas.productos.email');
 });
