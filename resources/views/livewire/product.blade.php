@@ -30,7 +30,7 @@
                         <input type="text" class="form-control @error('name') is-invalid @enderror" id="name"
                             wire:model="name" placeholder="Product title" aria-label="Titulo del Producto" required>
                         @error('name')
-                            <span class="invalid-feedback">{{ $message }}</span>
+                        <span class="invalid-feedback">{{ $message }}</span>
                         @enderror
                     </div>
                     <div class="row">
@@ -45,11 +45,11 @@
                                 data-placeholder="Seleccionar Categoría">
                                 <option value="">Seleccionar Categoría</option>
                                 @foreach ($categories as $category)
-                                    <option value="{{ $category->id }}">{{ $category->name_category }}</option>
+                                <option value="{{ $category->id }}">{{ $category->name_category }}</option>
                                 @endforeach
                             </select>
                             @error('category_id')
-                                <span class="invalid-feedback">{{ $message }}</span>
+                            <span class="invalid-feedback">{{ $message }}</span>
                             @enderror
                         </div>
                         <!-- Marca -->
@@ -60,11 +60,11 @@
                                 data-placeholder="Seleccionar Marca">
                                 <option value="">Seleccionar Marca</option>
                                 @foreach ($brands as $brand)
-                                    <option value="{{ $brand->id }}">{{ $brand->name }}</option>
+                                <option value="{{ $brand->id }}">{{ $brand->name }}</option>
                                 @endforeach
                             </select>
                             @error('brand_id')
-                                <span class="invalid-feedback">{{ $message }}</span>
+                            <span class="invalid-feedback">{{ $message }}</span>
                             @enderror
                         </div>
                     </div>
@@ -75,7 +75,7 @@
                         <textarea class="form-control @error('description') is-invalid @enderror" id="description" wire:model="description"
                             rows="3" placeholder="Escribe aquí..."></textarea>
                         @error('description')
-                            <span class="invalid-feedback">{{ $message }}</span>
+                        <span class="invalid-feedback">{{ $message }}</span>
                         @enderror
                     </div>
                 </div>
@@ -98,7 +98,7 @@
                         <input type="number" class="form-control @error('price') is-invalid @enderror" id="price"
                             wire:model="price" placeholder="Precio" aria-label="Precio del Producto">
                         @error('price')
-                            <span class="invalid-feedback">{{ $message }}</span>
+                        <span class="invalid-feedback">{{ $message }}</span>
                         @enderror
                     </div>
 
@@ -107,7 +107,7 @@
                         <input type="number" class="form-control @error('barcode') is-invalid @enderror" id="barcode"
                             wire:model="barcode" placeholder="Código de Producto" aria-label="Código de Producto">
                         @error('barcode')
-                            <span class="invalid-feedback">{{ $message }}</span>
+                        <span class="invalid-feedback">{{ $message }}</span>
                         @enderror
                     </div>
                     <!-- Instock switch -->
@@ -131,95 +131,7 @@
         <!-- /Second column -->
     </div>
 
-    @if ($product_id)
-        <!-- Variants -->
-        <div class="card mb-4">
-            <div class="card-header">
-                <h5 class="card-title mb-0">Variedad</h5>
-            </div>
-            <div class="card-body">
-                <div data-repeater-list="productVarieties">
-                    @foreach ($productVeriety as $index => $veriety)
-                        <div data-repeater-item>
-                            <div class="row">
-                                <!-- Almacen -->
-                                <div class="mb-1 col-3">
-                                    <label class="form-label mb-1" for="store_id">Almacen</label>
-                                    <select id="store_id"
-                                        class="select2 form-select @error('productVeriety.' . $index . '.store_id') is-invalid @enderror"
-                                        wire:model="productVeriety.{{ $index }}.store_id"
-                                        data-placeholder="Seleccionar Almacen">
-                                        <option value="">Seleccionar Almacen</option>
-                                        @foreach ($stores as $store)
-                                            <option value="{{ $store->id }}">{{ $store->name }}</option>
-                                        @endforeach
-                                    </select>
-                                    @error('productVeriety.' . $index . '.store_id')
-                                        <span class="invalid-feedback">{{ $message }}</span>
-                                    @enderror
-                                </div>
 
-                                <!-- Color -->
-                                <div class="mb-1 col-3">
-                                    <label class="form-label" for="color_id">Color:</label>
-                                    <select id="color_id"
-                                        class="select2 form-select @error('productVeriety.' . $index . '.color_id') is-invalid @enderror"
-                                        wire:model="productVeriety.{{ $index }}.color_id"
-                                        data-placeholder="Seleccionar Color">
-                                        <option value="">Seleccionar Color</option>
-                                        @foreach ($colors as $color)
-                                            <option value="{{ $color->id }}">{{ $color->name }}</option>
-                                        @endforeach
-                                    </select>
-                                    @error('productVeriety.' . $index . '.color_id')
-                                        <span class="invalid-feedback">{{ $message }}</span>
-                                    @enderror
-                                </div>
-
-                                <!-- Talla -->
-                                <div class="mb-1 col-3">
-                                    <label class="form-label" for="size_id">Talla:</label>
-                                    <select id="size_id"
-                                        class="select2 form-select @error('productVeriety.' . $index . '.size_id') is-invalid @enderror"
-                                        wire:model="productVeriety.{{ $index }}.size_id"
-                                        data-placeholder="Seleccionar Talla">
-                                        <option value="">Seleccionar Talla</option>
-                                        @foreach ($sizes as $size)
-                                            <option value="{{ $size->id }}">{{ $size->name }}</option>
-                                        @endforeach
-                                    </select>
-                                    @error('productVeriety.' . $index . '.size_id')
-                                        <span class="invalid-feedback">{{ $message }}</span>
-                                    @enderror
-                                </div>
-
-                                <!-- Cantidad -->
-                                <div class="mb-1 col-3">
-                                    <label class="form-label" for="quantity">Cantidad</label>
-                                    <input type="number"
-                                        class="form-control @error('productVeriety.' . $index . '.quantity') is-invalid @enderror"
-                                        id="quantity" wire:model="productVeriety.{{ $index }}.quantity"
-                                        placeholder="Cantidad" aria-label="Cantidad">
-                                    @error('productVeriety.' . $index . '.quantity')
-                                        <span class="invalid-feedback">{{ $message }}</span>
-                                    @enderror
-                                </div>
-                            </div>
-
-                            <div class="d-flex justify-content-between mt-2">
-                                <button class="btn btn-danger btn-sm"
-                                    wire:click="removeVeriety({{ $index }})">Eliminar</button>
-                            </div>
-                        </div>
-                    @endforeach
-                </div>
-                <div class="mt-3">
-                    <button class="btn btn-primary" wire:click="addVeriety">Agregar otra Variedad</button>
-                </div>
-            </div>
-        </div>
-        <!-- /Variants -->
-    @endif
 
     <!-- Media -->
     <div class="card mb-4">
@@ -243,4 +155,3 @@
     <!-- /Media -->
 
 </div>
-

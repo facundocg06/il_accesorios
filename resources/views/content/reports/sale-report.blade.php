@@ -48,6 +48,7 @@
                         </div>
                         <button type="submit" class="btn btn-success">Enviar por Email</button>
                     </form>
+
                 </div>
             </div>
         </div>

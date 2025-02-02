@@ -3,9 +3,10 @@
 namespace App\Models\Services;
 
 use App\Models\Repository\CustomerRepositoryInterface;
-use Illuminate\Support\Facades\DB;
 use App\Models\Repository\SaleRepositoryInterface;
 use App\Models\Repository\StockSalesRepositoryInterface;
+use App\Models\SaleNote;
+use Illuminate\Support\Facades\DB;
 
 class SaleService
 {
@@ -101,7 +102,6 @@ class SaleService
         return $this->saleRepository->getSalesBetweenDates($startDate, $endDate);
     }
 
-    // Generar archivo CSV
 
 
     public function generateSalesReport($sales, $startDate, $endDate)
@@ -126,5 +126,29 @@ class SaleService
         fclose($file);
 
         return $filePath;
+    }
+    public function getSalesByProduct($productId, $startDate, $endDate)
+    {
+        $sales = SaleNote::with(['details.stockSale' => function ($query) use ($productId) {
+            $query->where('product_id', $productId);
+        }])
+            ->whereHas('details.stockSale', function ($query) use ($productId) {
+                $query->where('product_id', $productId);
+            })
+            ->whereBetween('sale_date', [$startDate, $endDate])
+            ->get()
+            ->map(function ($sale) {
+                $detail = $sale->details->first();
+                return [
+                    'sale_date'      => $sale->sale_date,
+                    'quantity'       => $detail->amount,
+                    'unit_price'     => $detail->unitsale_price,
+                    'total'          => $detail->amount * $detail->unitsale_price,
+                    'payment_method' => $sale->payment_method,
+                    'status'         => $sale->sale_state,
+                ];
+            });
+
+        return $sales;
     }
 }

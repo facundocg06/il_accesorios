@@ -2,16 +2,17 @@
 
 namespace App\Livewire;
 
-use App\Models\Product;
 use App\Models\Services\CustomerService;
 use App\Models\Services\ProductService;
+use App\Models\Services\StoreService;
 use Livewire\Component;
 
 class Sale extends Component
 {
     public $selectedItem;
     public $products;
-    protected $customers;
+    public $customers;
+    public $stores;
 
     //Modelo de venta
     public $ci_customer;
@@ -21,25 +22,24 @@ class Sale extends Component
 
     public $items = [];
 
-
-
-    public function mount(ProductService $productService,CustomerService $customerService)
+    public function mount(ProductService $productService, CustomerService $customerService, StoreService $storeService)
     {
-        //dd($productService->getAllVarietyProducts());
         $this->products = $productService->getAllVarietyProducts();
         $this->customers = $customerService->getAll();
-
+        $this->stores = $storeService->getAll(); // Obtener tiendas
     }
 
-    public function submit(){
-
+    public function submit()
+    {
+        // Lógica de envío aquí
     }
 
     public function render()
     {
-        return view('livewire.sale',[
+        return view('livewire.sale', [
             'products' => $this->products,
             'customers' => $this->customers,
+            'stores' => $this->stores, // Pasar tiendas a la vista
         ]);
     }
 }

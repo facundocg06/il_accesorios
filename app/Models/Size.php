@@ -12,7 +12,4 @@ class Size extends Model
     protected $fillable = [
         'name',
     ];
-    public function stockSales(){
-        return $this->hasMany(StockSales::class);
-    }
 }

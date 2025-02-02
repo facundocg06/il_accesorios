@@ -3,6 +3,8 @@
 namespace App\Models\Repository;
 
 use App\Models\Product;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Log;
 
 class ProductRepository implements ProductRepositoryInterface
 {
@@ -22,8 +24,11 @@ class ProductRepository implements ProductRepositoryInterface
     }
     public function create($data)
     {
-        return Product::create($data);
+        Log::info("Datos recibidos para crear producto:", $data);
+        $filteredData = Arr::only($data, (new Product)->getFillable());
+        return Product::create($filteredData);
     }
+
     public function find($id)
     {
         return Product::find($id);
