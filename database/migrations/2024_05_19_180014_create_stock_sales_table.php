@@ -20,12 +20,7 @@ return new class extends Migration
             //Relacion con Almacen
             $table->unsignedBigInteger('store_id');
             $table->foreign('store_id')->references('id')->on('stores');
-            //Relacion con Color
-            $table->unsignedBigInteger('color_id');
-            $table->foreign('color_id')->references('id')->on('colors');
-            //Relacion con Size
-            $table->unsignedBigInteger('size_id');
-            $table->foreign('size_id')->references('id')->on('sizes');
+            //Relacion con Color          
 
             $table->unsignedBigInteger('created_by')->nullable();
             $table->foreign('created_by')->references('id')->on('users');

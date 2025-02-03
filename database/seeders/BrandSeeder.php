@@ -14,10 +14,10 @@ class BrandSeeder extends Seeder
     public function run(): void
     {
         DB::table('brands')->insert([
-            ['name' => 'Boliviana'],
             ['name' => 'Peruana'],
+            ['name' => 'Boliviana'],
             ['name' => 'Italiana'],
-            ['name' => 'Española'],
+            ['name' => 'Americana'],
         ]);
     }
 }

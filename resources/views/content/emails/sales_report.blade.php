@@ -16,7 +16,7 @@
                 <th>ID</th>
                 <th>Cliente</th>
                 <th>Fecha de Venta</th>
-                <th>Cantidad Total</th>
+                <th>Monto</th>
                 <th>Estado de Venta</th>
                 <th>Método de Pago</th>
             </tr>
@@ -31,12 +31,21 @@
                 <td>{{ $sale->sale_state }}</td>
                 <td>{{ $sale->payment_method }}</td>
             </tr>
+
             @empty
             <tr>
                 <td colspan="6" style="text-align: center;">No hay ventas en este periodo.</td>
             </tr>
             @endforelse
         </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="2"><strong>Totales</strong></td>
+                <td></td>
+                <td><strong>${{ number_format($sales->sum('total_quantity'), 2) }}</strong></td>
+                <td colspan="2"></td>
+            </tr>
+        </tfoot>
     </table>
 </body>
 

@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Store extends Model
 {
     use HasFactory;
-    protected $table= "stores";
+    protected $table = "stores";
     protected $fillable = [
         'name',
         'location',
@@ -16,7 +16,12 @@ class Store extends Model
         'created_by',
         'updated_by',
     ];
-    public function stockSales(){
+    public function stockSales()
+    {
         return $this->hasMany(StockSales::class);
+    }
+    public function storeSales()
+    {
+        return $this->hasMany(SaleNote::class);
     }
 }

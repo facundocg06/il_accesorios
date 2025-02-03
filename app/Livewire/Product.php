@@ -28,12 +28,10 @@ class Product extends Component
     public $category_id;
     public $brand_id;
     public $barcode;
-    public $productVeriety = [];
+    //public $productVeriety = [];
 
     public $categories;
     public $brands;
-    public $colors;
-    public $sizes;
     public $stores;
 
     public $product_id;
@@ -42,21 +40,14 @@ class Product extends Component
     {
         $this->categories = $categoryService->getAll();
         $this->brands = $brandService->getAll();
-        $this->colors = $colorService->getAll();
-        $this->sizes = $sizeService->getAll();
         $this->stores = $storeService->getAll();
-        $this->productVeriety[] = [
-            'store_id' => null, 'color_id' => null, 'size_id' => null, 'quantity' => null,
-        ];
+
         if ($product_id) {
             $this->product_id = $product_id;
             $this->loadProduct($product_id);
         }
     }
-    public function addVeriety()
-    {
-        $this->productVeriety[] = ['store_id' => '', 'color_id' => '', 'size_id' => '', 'quantity' => ''];
-    }
+
     public function loadProduct($product_id)
     {
         $product = app(ProductService::class)->getProductById($product_id);
@@ -66,20 +57,8 @@ class Product extends Component
         $this->category_id = $product->category_id;
         $this->brand_id = $product->brand_id;
         $this->barcode = $product->barcode;
-        $this->productVeriety = $product->stockSales->map(function ($stockSale) {
-            return [
-                'store_id' => $stockSale->store_id,
-                'color_id' => $stockSale->color_id,
-                'size_id' => $stockSale->size_id,
-                'quantity' => $stockSale->quantity,
-            ];
-        })->toArray();
     }
-    public function removeVeriety($index)
-    {
-        unset($this->productVeriety[$index]);
-        $this->productVeriety = array_values($this->productVeriety);
-    }
+
     public function submit(ProductService $productService)
     {
         $validatedData = $this->validate(ProductRequest::getRules(), ProductRequest::getMessages());
@@ -96,21 +75,19 @@ class Product extends Component
                         'product_id' => $product->id,
                         'url_photo' => $path
                     ]);
-                    $product->url_front_page= $path;
+                    $product->url_front_page = $path;
                     $product->save();
                 }
                 return redirect()->route('product-list')->with('success', SuccessMessages::PRODUCT_CREATED);
             }
             return redirect()->route('product-list')->with('success', SuccessMessages::PRODUCT_CREATED);
             $this->reset();
-            $this->productVeriety = [];
+            // $this->productVeriety = [];
         } catch (Exception $e) {
             return redirect()->route('product-list')->with('error', $e->getMessage());
         }
     }
-    public function uploadFiles($productId)
-    {
-    }
+    public function uploadFiles($productId) {}
     public function render()
     {
         return view('livewire.product');

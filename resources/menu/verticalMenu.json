@@ -19,6 +19,11 @@
                     "url": "/date-reports",
                     "name": "Reportes Ventas por Fechas",
                     "slug": "ventas-reportes-fechas"
+                },
+                {
+                    "url": "/reports/ventas/producto",
+                    "name": "Reportes Ventas por Producto",
+                    "slug": "ventas-reportes-producto"
                 }
             ],
             "can": "Administrador"
@@ -44,9 +49,15 @@
                     "url": "product/product-list",
                     "name": "Productos",
                     "slug": "product-list"
+                },
+                {
+                    "url": "inventory-adjustments/create",
+                    "name": "Aluste de Inventario",
+                    "slug": "inventory-adjustments"
                 }
+                
             ],
-            "can": "Administrador"
+            "can":"Almacenero"
         },
         {
             "name": "Clientes",

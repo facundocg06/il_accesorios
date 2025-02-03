@@ -16,10 +16,12 @@ class SaleDetail extends Model
         'amount',
         'subtotal_price',
     ];
-    public function stockSale(){
+    public function stockSale()
+    {
         return $this->belongsTo(StockSales::class);
     }
-    public function saleNote(){
+    public function saleNote()
+    {
         return $this->belongsTo(SaleNote::class);
     }
 }

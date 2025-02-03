@@ -24,11 +24,6 @@ class ProductRequest extends FormRequest
             'brand_id' => 'required',
             'barcode' => 'required',
 
-            'productVeriety' => 'required|array',
-            'productVeriety.*.store_id' => 'required|integer',
-            'productVeriety.*.color_id' => 'required|integer',
-            'productVeriety.*.size_id' => 'required|integer',
-            'productVeriety.*.quantity' => 'required|integer|min:1',
 
             'files' => 'nullable',
 
@@ -64,21 +59,7 @@ class ProductRequest extends FormRequest
 
             'barcode.required' => 'El código de barras del producto es obligatorio.',
 
-            'productVeriety.required' => 'La variedad del producto es obligatoria.',
-            'productVeriety.array' => 'La variedad del producto debe ser un arreglo.',
 
-            'productVeriety.*.store_id.required' => 'El almacén es obligatorio para cada variedad de producto.',
-            'productVeriety.*.store_id.integer' => 'El almacén seleccionado no es válido.',
-
-            'productVeriety.*.color_id.required' => 'El color es obligatorio para cada variedad de producto.',
-            'productVeriety.*.color_id.integer' => 'El color seleccionado no es válido.',
-
-            'productVeriety.*.size_id.required' => 'La talla es obligatoria para cada variedad de producto.',
-            'productVeriety.*.size_id.integer' => 'La talla seleccionada no es válida.',
-
-            'productVeriety.*.quantity.required' => 'La cantidad es obligatoria para cada variedad de producto.',
-            'productVeriety.*.quantity.integer' => 'La cantidad debe ser un número entero.',
-            'productVeriety.*.quantity.min' => 'La cantidad debe ser al menos 1.',
         ];
     }
 }

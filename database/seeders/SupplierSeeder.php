@@ -14,22 +14,19 @@ class SupplierSeeder extends Seeder
     public function run(): void
     {
         DB::table('suppliers')->insert([
-            [
-                'nit_supplier' => 111,
-                'reason_social' => 'Bazar Polpe',
-                'phone_supplier' => 33465352
+            ['nit_supplier' => 111,
+            'reason_social' => 'Proveedor 1',
+            'phone_supplier' => 111
             ],
 
-            [
-                'nit_supplier' => 222,
-                'reason_social' => 'Merceria El Detalle',
-                'phone_supplier' => 33361313
+            ['nit_supplier' => 222,
+            'reason_social' => 'Proveedor 2',
+            'phone_supplier' => 222
             ],
 
-            [
-                'nit_supplier' => 333,
-                'reason_social' => 'Bazar Kelly',
-                'phone_supplier' => 33622945
+            ['nit_supplier' => 333,
+            'reason_social' => 'Proveedor 3',
+            'phone_supplier' => 333
             ],
 
 

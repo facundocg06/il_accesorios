@@ -13,7 +13,4 @@ class Color extends Model
         'name',
         'hex',
     ];
-    public function stockSales(){
-        return $this->hasMany(StockSales::class);
-    }
 }
