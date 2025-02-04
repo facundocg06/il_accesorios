@@ -20,10 +20,7 @@
             @csrf
 
             <div class="row row-cols-lg-auto g-3 align-items-center">
-                <div class="col-md-4">
-                    <label for="date" class="form-label">Fecha</label>
-                    <input type="date" id="date" name="date" class="form-control" required>
-                </div>
+
 
                 <div class="col-md-4">
                     <label for="description" class="form-label">Descripción</label>
