@@ -44,4 +44,8 @@ RUN mkdir -p bootstrap/cache storage/framework/{sessions,views,cache} \
     && chown -R www-data:www-data bootstrap/cache storage
 
 # Comando de inicio
-CMD ["sh", "-c", "php-fpm & nginx -g 'daemon off;'"]
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+ENTRYPOINT ["/entrypoint.sh"]
+CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=8000"]
+
