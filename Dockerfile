@@ -39,6 +39,9 @@ COPY nginx/default.conf /etc/nginx/conf.d/default.conf
 
 # Exponer puertos
 EXPOSE 80
+RUN mkdir -p bootstrap/cache storage/framework/{sessions,views,cache} \
+    && chmod -R 775 bootstrap/cache storage \
+    && chown -R www-data:www-data bootstrap/cache storage
 
 # Comando de inicio
 CMD ["sh", "-c", "php-fpm & nginx -g 'daemon off;'"]
