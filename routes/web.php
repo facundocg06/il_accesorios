@@ -147,4 +147,16 @@ Route::middleware('auth')->group(function () {
     Route::post('/reports/ventas/producto/generate', [SaleController::class, 'generateSalesByProductReport'])
         ->name('reports.ventas.producto.generate');
     Route::post('/sendemail', [SaleController::class, 'sendSalesByProductReport'])->name('reports.ventas.productos.email');
+
+    Route::get('/reports/adjustments', [InventoryAdjustmentController::class, 'adjustmentReportForm'])
+        ->name('reports.adjustments.form');
+
+    // Generar reporte
+    Route::post('/reports/adjustments/generate', [InventoryAdjustmentController::class, 'generateAdjustmentReport'])
+        ->name('reports.adjustments.generate');
+
+    // Enviar reporte por correo
+
+    Route::post('/send-adjustment-email', [InventoryAdjustmentController::class, 'sendAdjustmentReport'])
+        ->name('reports.adjustments.send_email');
 });

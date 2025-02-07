@@ -24,6 +24,11 @@
                     "url": "/reports/ventas/producto",
                     "name": "Reportes Ventas por Producto",
                     "slug": "ventas-reportes-producto"
+                },
+                {
+                    "url": "/reports/adjustments",
+                    "name": "Reportes Ingreos y Egresos",
+                    "slug": "ventas-Ingresos-Egresos"
                 }
             ],
             "can": "Administrador"

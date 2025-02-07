@@ -4292,7 +4292,7 @@
     "src": "resources/assets/vendor/libs/nouislider/nouislider.scss"
   },
   "resources/assets/vendor/libs/numeral/numeral.js": {
-    "file": "assets/numeral-fe9d8866.js",
+    "file": "assets/numeral-880dc4d4.js",
     "imports": [
       "__commonjsHelpers-de833af9.js"
     ],
