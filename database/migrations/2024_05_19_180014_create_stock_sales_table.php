@@ -14,14 +14,10 @@ return new class extends Migration
         Schema::create('stock_sales', function (Blueprint $table) {
             $table->id();
             $table->integer('quantity');
-            //Relacion con Producto
             $table->unsignedBigInteger('product_id');
             $table->foreign('product_id')->references('id')->on('products');
-            //Relacion con Almacen
             $table->unsignedBigInteger('store_id');
             $table->foreign('store_id')->references('id')->on('stores');
-            //Relacion con Color          
-
             $table->unsignedBigInteger('created_by')->nullable();
             $table->foreign('created_by')->references('id')->on('users');
             $table->unsignedBigInteger('updated_by')->nullable();

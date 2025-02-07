@@ -10,7 +10,7 @@ class DetailsAdjustment extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['quantity', 'inventory_adjustment_id', 'stock_sale_id'];
+    protected $fillable = ['quantity', 'inventory_adjustment_id', 'stock_sale_id', 'product_id', 'store_id'];
 
     public function inventoryAdjustment()
     {
@@ -20,5 +20,15 @@ class DetailsAdjustment extends Model
     public function stockSale()
     {
         return $this->belongsTo(StockSales::class);
+    }
+
+    public function product()
+    {
+        return $this->belongsTo(Product::class);
+    }
+
+    public function store()
+    {
+        return $this->belongsTo(Store::class);
     }
 }

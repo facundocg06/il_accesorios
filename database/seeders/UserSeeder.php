@@ -33,7 +33,7 @@ class UserSeeder extends Seeder
             'last_name' => 'fisher',
             'phone' => '78198215',
         ]);
-        $user->assignRole('Administrador');
+        $user->assignRole('Almacenero');
 
         $user = User::create([
             'username' => 'ivana',

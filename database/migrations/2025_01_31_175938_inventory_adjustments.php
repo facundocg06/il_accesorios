@@ -18,8 +18,6 @@ return new class extends Migration
                 $table->date('date');
                 $table->text('description')->nullable();
                 $table->foreignId('user_id')->constrained()->onDelete('cascade');
-                $table->foreignId('product_id')->constrained()->onDelete('cascade');
-                $table->foreignId('store_id')->constrained()->onDelete('cascade');
                 $table->enum('type', ['Ingreso', 'Egreso']);
                 $table->timestamps();
             }

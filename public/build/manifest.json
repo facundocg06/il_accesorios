@@ -870,7 +870,7 @@
     "src": "resources/assets/js/wizard-ex-property-listing.js"
   },
   "resources/assets/vendor/fonts/flag-icons.scss": {
-    "file": "assets/flag-icons-1e7cd7b6.css",
+    "file": "assets/flag-icons-50b68188.css",
     "isEntry": true,
     "src": "resources/assets/vendor/fonts/flag-icons.scss"
   },
@@ -3035,7 +3035,7 @@
     "src": "resources/assets/vendor/fonts/flags/4x3/zw.svg"
   },
   "resources/assets/vendor/fonts/fontawesome.scss": {
-    "file": "assets/fontawesome-5642b07c.css",
+    "file": "assets/fontawesome-a2243c8c.css",
     "isEntry": true,
     "src": "resources/assets/vendor/fonts/fontawesome.scss"
   },
@@ -3072,7 +3072,7 @@
     "src": "resources/assets/vendor/fonts/fontawesome/fa-v4compatibility.woff2"
   },
   "resources/assets/vendor/fonts/tabler-icons.scss": {
-    "file": "assets/tabler-icons-e39ba960.css",
+    "file": "assets/tabler-icons-d87ec60c.css",
     "isEntry": true,
     "src": "resources/assets/vendor/fonts/tabler-icons.scss"
   },
@@ -3122,14 +3122,14 @@
     "src": "resources/assets/vendor/js/menu.js"
   },
   "resources/assets/vendor/js/template-customizer.css": {
-    "file": "assets/template-customizer-b9f081e7.css",
+    "file": "assets/template-customizer-06d83942.css",
     "src": "resources/assets/vendor/js/template-customizer.css"
   },
   "resources/assets/vendor/js/template-customizer.js": {
     "css": [
-      "assets/template-customizer-b9f081e7.css"
+      "assets/template-customizer-06d83942.css"
     ],
-    "file": "assets/template-customizer-79c8e696.js",
+    "file": "assets/template-customizer-2820873b.js",
     "isEntry": true,
     "src": "resources/assets/vendor/js/template-customizer.js"
   },
@@ -3236,7 +3236,7 @@
     "src": "resources/assets/vendor/libs/bootstrap-daterangepicker/bootstrap-daterangepicker.js"
   },
   "resources/assets/vendor/libs/bootstrap-daterangepicker/bootstrap-daterangepicker.scss": {
-    "file": "assets/bootstrap-daterangepicker-758b25c7.css",
+    "file": "assets/bootstrap-daterangepicker-9708255b.css",
     "isEntry": true,
     "src": "resources/assets/vendor/libs/bootstrap-daterangepicker/bootstrap-daterangepicker.scss"
   },
@@ -3256,7 +3256,7 @@
     "src": "resources/assets/vendor/libs/bootstrap-select/bootstrap-select.js"
   },
   "resources/assets/vendor/libs/bootstrap-select/bootstrap-select.scss": {
-    "file": "assets/bootstrap-select-96c2a9c7.css",
+    "file": "assets/bootstrap-select-85597aa7.css",
     "isEntry": true,
     "src": "resources/assets/vendor/libs/bootstrap-select/bootstrap-select.scss"
   },
@@ -3349,7 +3349,7 @@
     "src": "resources/assets/vendor/libs/datatables-rowgroup-bs5/rowgroup.bootstrap5.scss"
   },
   "resources/assets/vendor/libs/datatables-select-bs5/select.bootstrap5.scss": {
-    "file": "assets/select.bootstrap5-c727efd9.css",
+    "file": "assets/select.bootstrap5-903b9f8e.css",
     "isEntry": true,
     "src": "resources/assets/vendor/libs/datatables-select-bs5/select.bootstrap5.scss"
   },
@@ -4102,7 +4102,7 @@
     "src": "resources/assets/vendor/libs/fullcalendar/fullcalendar.js"
   },
   "resources/assets/vendor/libs/fullcalendar/fullcalendar.scss": {
-    "file": "assets/fullcalendar-bc544e26.css",
+    "file": "assets/fullcalendar-e20dac3d.css",
     "isEntry": true,
     "src": "resources/assets/vendor/libs/fullcalendar/fullcalendar.scss"
   },
@@ -4168,7 +4168,7 @@
     "src": "resources/assets/vendor/libs/jquery-timepicker/jquery-timepicker.js"
   },
   "resources/assets/vendor/libs/jquery-timepicker/jquery-timepicker.scss": {
-    "file": "assets/jquery-timepicker-b6311c4d.css",
+    "file": "assets/jquery-timepicker-b4187f97.css",
     "isEntry": true,
     "src": "resources/assets/vendor/libs/jquery-timepicker/jquery-timepicker.scss"
   },
@@ -4192,7 +4192,7 @@
     "src": "resources/assets/vendor/libs/jstree/jstree.js"
   },
   "resources/assets/vendor/libs/jstree/jstree.scss": {
-    "file": "assets/jstree-da7ac3ab.css",
+    "file": "assets/jstree-33302914.css",
     "isEntry": true,
     "src": "resources/assets/vendor/libs/jstree/jstree.scss"
   },
@@ -4226,7 +4226,7 @@
       "assets/marker-icon-574c3a5c.png",
       "assets/marker-shadow-264f5c64.png"
     ],
-    "file": "assets/leaflet-8eec7787.js",
+    "file": "assets/leaflet-7b665759.js",
     "imports": [
       "__commonjsHelpers-de833af9.js"
     ],
@@ -4234,7 +4234,7 @@
     "src": "resources/assets/vendor/libs/leaflet/leaflet.js"
   },
   "resources/assets/vendor/libs/leaflet/leaflet.scss": {
-    "file": "assets/leaflet-67bba548.css",
+    "file": "assets/leaflet-293906bf.css",
     "isEntry": true,
     "src": "resources/assets/vendor/libs/leaflet/leaflet.scss"
   },
@@ -4354,7 +4354,7 @@
     "src": "resources/assets/vendor/libs/quill/katex.js"
   },
   "resources/assets/vendor/libs/quill/katex.scss": {
-    "file": "assets/katex-6bfd5118.css",
+    "file": "assets/katex-6ae78922.css",
     "isEntry": true,
     "src": "resources/assets/vendor/libs/quill/katex.scss"
   },
@@ -4381,7 +4381,7 @@
     "src": "resources/assets/vendor/libs/select2/select2.js"
   },
   "resources/assets/vendor/libs/select2/select2.scss": {
-    "file": "assets/select2-0c0a60ae.css",
+    "file": "assets/select2-45539864.css",
     "isEntry": true,
     "src": "resources/assets/vendor/libs/select2/select2.scss"
   },
@@ -4412,7 +4412,7 @@
     "src": "resources/assets/vendor/libs/sweetalert2/sweetalert2.scss"
   },
   "resources/assets/vendor/libs/swiper/swiper.js": {
-    "file": "assets/swiper-22ee1154.js",
+    "file": "assets/swiper-6f30b9ce.js",
     "isEntry": true,
     "src": "resources/assets/vendor/libs/swiper/swiper.js"
   },
@@ -4431,7 +4431,7 @@
     "src": "resources/assets/vendor/libs/toastr/toastr.js"
   },
   "resources/assets/vendor/libs/toastr/toastr.scss": {
-    "file": "assets/toastr-dc50d2d7.css",
+    "file": "assets/toastr-c522d835.css",
     "isEntry": true,
     "src": "resources/assets/vendor/libs/toastr/toastr.scss"
   },
@@ -4445,17 +4445,17 @@
     "src": "resources/assets/vendor/libs/typeahead-js/typeahead.js"
   },
   "resources/assets/vendor/libs/typeahead-js/typeahead.scss": {
-    "file": "assets/typeahead-9dbfe375.css",
+    "file": "assets/typeahead-f3c5d87e.css",
     "isEntry": true,
     "src": "resources/assets/vendor/libs/typeahead-js/typeahead.scss"
   },
   "resources/assets/vendor/scss/core-dark.scss": {
-    "file": "assets/core-dark-e3dbb9bf.css",
+    "file": "assets/core-dark-9db30a8d.css",
     "isEntry": true,
     "src": "resources/assets/vendor/scss/core-dark.scss"
   },
   "resources/assets/vendor/scss/core.scss": {
-    "file": "assets/core-9c207419.css",
+    "file": "assets/core-78558577.css",
     "isEntry": true,
     "src": "resources/assets/vendor/scss/core.scss"
   },
@@ -4490,7 +4490,7 @@
     "src": "resources/assets/vendor/scss/pages/app-ecommerce.scss"
   },
   "resources/assets/vendor/scss/pages/app-email.scss": {
-    "file": "assets/app-email-76e1a22b.css",
+    "file": "assets/app-email-04dbddc7.css",
     "isEntry": true,
     "src": "resources/assets/vendor/scss/pages/app-email.scss"
   },
@@ -4520,7 +4520,7 @@
     "src": "resources/assets/vendor/scss/pages/app-logistics-fleet.scss"
   },
   "resources/assets/vendor/scss/pages/cards-advance.scss": {
-    "file": "assets/cards-advance-ab1e05a3.css",
+    "file": "assets/cards-advance-f5578841.css",
     "isEntry": true,
     "src": "resources/assets/vendor/scss/pages/cards-advance.scss"
   },
@@ -4545,7 +4545,7 @@
     "src": "resources/assets/vendor/scss/pages/front-page-pricing.scss"
   },
   "resources/assets/vendor/scss/pages/front-page.scss": {
-    "file": "assets/front-page-8c87269b.css",
+    "file": "assets/front-page-78f1381d.css",
     "isEntry": true,
     "src": "resources/assets/vendor/scss/pages/front-page.scss"
   },
@@ -4600,92 +4600,92 @@
     "src": "resources/assets/vendor/scss/pages/wizard-ex-checkout.scss"
   },
   "resources/assets/vendor/scss/rtl/core-dark.scss": {
-    "file": "assets/core-dark-cceea487.css",
+    "file": "assets/core-dark-8899cd05.css",
     "isEntry": true,
     "src": "resources/assets/vendor/scss/rtl/core-dark.scss"
   },
   "resources/assets/vendor/scss/rtl/core.scss": {
-    "file": "assets/core-99c99171.css",
+    "file": "assets/core-b69f6930.css",
     "isEntry": true,
     "src": "resources/assets/vendor/scss/rtl/core.scss"
   },
   "resources/assets/vendor/scss/rtl/theme-bordered-dark.scss": {
-    "file": "assets/theme-bordered-dark-702c2fb4.css",
+    "file": "assets/theme-bordered-dark-6e2d291b.css",
     "isEntry": true,
     "src": "resources/assets/vendor/scss/rtl/theme-bordered-dark.scss"
   },
   "resources/assets/vendor/scss/rtl/theme-bordered.scss": {
-    "file": "assets/theme-bordered-94f026d5.css",
+    "file": "assets/theme-bordered-ca076d19.css",
     "isEntry": true,
     "src": "resources/assets/vendor/scss/rtl/theme-bordered.scss"
   },
   "resources/assets/vendor/scss/rtl/theme-default-dark.scss": {
-    "file": "assets/theme-default-dark-13c55556.css",
+    "file": "assets/theme-default-dark-c23b9ff5.css",
     "isEntry": true,
     "src": "resources/assets/vendor/scss/rtl/theme-default-dark.scss"
   },
   "resources/assets/vendor/scss/rtl/theme-default.scss": {
-    "file": "assets/theme-default-1b7a6535.css",
+    "file": "assets/theme-default-72a572db.css",
     "isEntry": true,
     "src": "resources/assets/vendor/scss/rtl/theme-default.scss"
   },
   "resources/assets/vendor/scss/rtl/theme-raspberry-dark.scss": {
-    "file": "assets/theme-raspberry-dark-7a2a6bb1.css",
+    "file": "assets/theme-raspberry-dark-eaad8b1d.css",
     "isEntry": true,
     "src": "resources/assets/vendor/scss/rtl/theme-raspberry-dark.scss"
   },
   "resources/assets/vendor/scss/rtl/theme-raspberry.scss": {
-    "file": "assets/theme-raspberry-8031b8a9.css",
+    "file": "assets/theme-raspberry-56e2e436.css",
     "isEntry": true,
     "src": "resources/assets/vendor/scss/rtl/theme-raspberry.scss"
   },
   "resources/assets/vendor/scss/rtl/theme-semi-dark-dark.scss": {
-    "file": "assets/theme-semi-dark-dark-4d9c2288.css",
+    "file": "assets/theme-semi-dark-dark-528d13f9.css",
     "isEntry": true,
     "src": "resources/assets/vendor/scss/rtl/theme-semi-dark-dark.scss"
   },
   "resources/assets/vendor/scss/rtl/theme-semi-dark.scss": {
-    "file": "assets/theme-semi-dark-efab5358.css",
+    "file": "assets/theme-semi-dark-e86ad064.css",
     "isEntry": true,
     "src": "resources/assets/vendor/scss/rtl/theme-semi-dark.scss"
   },
   "resources/assets/vendor/scss/theme-bordered-dark.scss": {
-    "file": "assets/theme-bordered-dark-c19a7025.css",
+    "file": "assets/theme-bordered-dark-882aab42.css",
     "isEntry": true,
     "src": "resources/assets/vendor/scss/theme-bordered-dark.scss"
   },
   "resources/assets/vendor/scss/theme-bordered.scss": {
-    "file": "assets/theme-bordered-dd611d5c.css",
+    "file": "assets/theme-bordered-e08f9e75.css",
     "isEntry": true,
     "src": "resources/assets/vendor/scss/theme-bordered.scss"
   },
   "resources/assets/vendor/scss/theme-default-dark.scss": {
-    "file": "assets/theme-default-dark-1b745afe.css",
+    "file": "assets/theme-default-dark-f098fc62.css",
     "isEntry": true,
     "src": "resources/assets/vendor/scss/theme-default-dark.scss"
   },
   "resources/assets/vendor/scss/theme-default.scss": {
-    "file": "assets/theme-default-b3b56544.css",
+    "file": "assets/theme-default-e9386816.css",
     "isEntry": true,
     "src": "resources/assets/vendor/scss/theme-default.scss"
   },
   "resources/assets/vendor/scss/theme-raspberry-dark.scss": {
-    "file": "assets/theme-raspberry-dark-0dc98a98.css",
+    "file": "assets/theme-raspberry-dark-a6fc7619.css",
     "isEntry": true,
     "src": "resources/assets/vendor/scss/theme-raspberry-dark.scss"
   },
   "resources/assets/vendor/scss/theme-raspberry.scss": {
-    "file": "assets/theme-raspberry-adf866eb.css",
+    "file": "assets/theme-raspberry-519a5a89.css",
     "isEntry": true,
     "src": "resources/assets/vendor/scss/theme-raspberry.scss"
   },
   "resources/assets/vendor/scss/theme-semi-dark-dark.scss": {
-    "file": "assets/theme-semi-dark-dark-bff25e3c.css",
+    "file": "assets/theme-semi-dark-dark-3792e233.css",
     "isEntry": true,
     "src": "resources/assets/vendor/scss/theme-semi-dark-dark.scss"
   },
   "resources/assets/vendor/scss/theme-semi-dark.scss": {
-    "file": "assets/theme-semi-dark-c05bb095.css",
+    "file": "assets/theme-semi-dark-0695a504.css",
     "isEntry": true,
     "src": "resources/assets/vendor/scss/theme-semi-dark.scss"
   },
