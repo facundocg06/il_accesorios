@@ -183,7 +183,7 @@ class InventoryAdjustmentController extends Controller
             // Enviar correo
             Mail::send('content.emails.adjustment-report', $emailData, function ($message) use ($recipientEmail, $user, $store) {
                 $message->to($recipientEmail)
-                    ->from($user->email, $user->name)
+                    ->from("ventas@ilaccesorios.shop", $user->name)
                     ->subject("Reporte de Ajustes de Inventario - Tienda: {$store->name}");
             });
 
