@@ -2632,3 +2632,99 @@
   'quantity' => '30',
 )  
 [2025-02-08 06:41:06] local.INFO: Iniciando transacción para ajuste de inventario.  
+[2025-02-08 08:37:54] local.INFO: Datos recibidos para crear producto: {"name":"Anillo Promocion","description":"anillos de graduacion ","price":"450","category_id":"3","brand_id":"2","barcode":"4505","files":[]} 
+[2025-02-08 08:42:05] local.INFO: Solicitud recibida:  {"_token":"S0VEvQ6SlWx2MSiy2watIQRwaiMwl4o7ZmfpiucJ","description":"ingreso de productos","product_id":"4","store_id":"1","type":"Ingreso","quantity":"50"} 
+[2025-02-08 08:42:05] local.INFO: Iniciando transacción para ajuste de inventario.  
+[2025-02-08 08:42:06] local.ERROR: Error en la transacción de ajuste de inventario: Se detectó un ajuste duplicado. Intenta nuevamente más tarde.  
+[2025-02-08 08:42:50] local.INFO: Solicitud recibida:  {"_token":"S0VEvQ6SlWx2MSiy2watIQRwaiMwl4o7ZmfpiucJ","description":"Ingreso de productos","product_id":"4","store_id":"1","type":"Ingreso","quantity":"10"} 
+[2025-02-08 08:42:50] local.INFO: Iniciando transacción para ajuste de inventario.  
+[2025-02-08 08:42:50] local.INFO: Ajuste de inventario registrado correctamente.  
+[2025-02-08 08:44:54] local.INFO: Solicitud recibida:  {"_token":"S0VEvQ6SlWx2MSiy2watIQRwaiMwl4o7ZmfpiucJ","description":"Ingreso de productos","product_id":"4","store_id":"2","type":"Ingreso","quantity":"20"} 
+[2025-02-08 08:44:54] local.INFO: Iniciando transacción para ajuste de inventario.  
+[2025-02-08 08:44:54] local.ERROR: Error en la transacción de ajuste de inventario: Se detectó un ajuste duplicado. Intenta nuevamente más tarde.  
+[2025-02-08 08:46:02] local.INFO: array (
+  '_token' => 'S0VEvQ6SlWx2MSiy2watIQRwaiMwl4o7ZmfpiucJ',
+  'description' => 'Ingreso de productos',
+  'product_id' => '4',
+  'store_id' => '2',
+  'type' => 'Ingreso',
+  'quantity' => '20',
+)  
+[2025-02-08 08:46:02] local.INFO: array (
+  '_token' => 'S0VEvQ6SlWx2MSiy2watIQRwaiMwl4o7ZmfpiucJ',
+  'description' => 'Ingreso de productos',
+  'product_id' => '4',
+  'store_id' => '2',
+  'type' => 'Ingreso',
+  'quantity' => '20',
+)  
+[2025-02-08 08:46:02] local.INFO: Iniciando transacción para ajuste de inventario.  
+[2025-02-08 08:46:27] local.INFO: array (
+  '_token' => 'S0VEvQ6SlWx2MSiy2watIQRwaiMwl4o7ZmfpiucJ',
+  'description' => 'Ingreso de productos',
+  'product_id' => '4',
+  'store_id' => '3',
+  'type' => 'Ingreso',
+  'quantity' => '10',
+)  
+[2025-02-08 08:46:27] local.INFO: array (
+  '_token' => 'S0VEvQ6SlWx2MSiy2watIQRwaiMwl4o7ZmfpiucJ',
+  'description' => 'Ingreso de productos',
+  'product_id' => '4',
+  'store_id' => '3',
+  'type' => 'Ingreso',
+  'quantity' => '10',
+)  
+[2025-02-08 08:46:27] local.INFO: Iniciando transacción para ajuste de inventario.  
+[2025-02-08 08:51:25] local.INFO: array (
+  '_token' => 'S0VEvQ6SlWx2MSiy2watIQRwaiMwl4o7ZmfpiucJ',
+  'description' => 'ingreso de productos',
+  'product_id' => '3',
+  'store_id' => '2',
+  'type' => 'Ingreso',
+  'quantity' => '50',
+)  
+[2025-02-08 08:51:25] local.INFO: array (
+  '_token' => 'S0VEvQ6SlWx2MSiy2watIQRwaiMwl4o7ZmfpiucJ',
+  'description' => 'ingreso de productos',
+  'product_id' => '3',
+  'store_id' => '2',
+  'type' => 'Ingreso',
+  'quantity' => '50',
+)  
+[2025-02-08 08:51:25] local.INFO: Iniciando transacción para ajuste de inventario.  
+[2025-02-08 08:52:24] local.INFO: array (
+  '_token' => 'S0VEvQ6SlWx2MSiy2watIQRwaiMwl4o7ZmfpiucJ',
+  'description' => 'ingreso de productos',
+  'product_id' => '2',
+  'store_id' => '3',
+  'type' => 'Ingreso',
+  'quantity' => '20',
+)  
+[2025-02-08 08:52:24] local.INFO: array (
+  '_token' => 'S0VEvQ6SlWx2MSiy2watIQRwaiMwl4o7ZmfpiucJ',
+  'description' => 'ingreso de productos',
+  'product_id' => '2',
+  'store_id' => '3',
+  'type' => 'Ingreso',
+  'quantity' => '20',
+)  
+[2025-02-08 08:52:24] local.INFO: Iniciando transacción para ajuste de inventario.  
+[2025-02-08 08:59:16] local.INFO: Datos recibidos para crear producto: {"name":"Manilla de plata","description":"manilla de plata 25","price":"450","category_id":"1","brand_id":"2","barcode":"4112","files":[]} 
+[2025-02-08 08:59:35] local.INFO: array (
+  '_token' => 'S0VEvQ6SlWx2MSiy2watIQRwaiMwl4o7ZmfpiucJ',
+  'description' => 'Ingreso de productos',
+  'product_id' => '5',
+  'store_id' => '1',
+  'type' => 'Ingreso',
+  'quantity' => '10',
+)  
+[2025-02-08 08:59:35] local.INFO: array (
+  '_token' => 'S0VEvQ6SlWx2MSiy2watIQRwaiMwl4o7ZmfpiucJ',
+  'description' => 'Ingreso de productos',
+  'product_id' => '5',
+  'store_id' => '1',
+  'type' => 'Ingreso',
+  'quantity' => '10',
+)  
+[2025-02-08 08:59:36] local.INFO: Iniciando transacción para ajuste de inventario.  
