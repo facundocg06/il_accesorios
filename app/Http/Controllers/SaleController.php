@@ -175,9 +175,10 @@ class SaleController extends Controller
             // Enviamos el correo
             Mail::send('content.emails.sales_report', $emailData, function ($message) use ($recipientEmail, $user) {
                 $message->to($recipientEmail)
-                    ->from($user->email, $user->name) // Remitente
+                    ->from("ventas@ilaccesorios.shop", $user->name) // Remitente
                     ->subject('Reporte de Ventas'); // Asunto
             });
+
             return redirect()->route('reports.ventas.form')->with('success', 'El reporte de ventas se envió correctamente.');
         } catch (\Exception $e) {
             // Redirigir al inicio con un mensaje de error
@@ -227,7 +228,7 @@ class SaleController extends Controller
             // Enviar correo
             Mail::send('content.emails.sales_by_product_report', $emailData, function ($message) use ($recipientEmail, $user, $product) {
                 $message->to($recipientEmail)
-                    ->from($user->email, $user->name)
+                    ->from("ventas@ilaccesorios.shop", $user->name)
                     ->subject("Reporte de Ventas - Producto: {$product->name}");
             });
 
@@ -253,7 +254,7 @@ class SaleController extends Controller
 
             Mail::send($view, $emailData, function ($message) use ($recipientEmail, $user, $subject) {
                 $message->to($recipientEmail)
-                    ->from($user->email, $user->name)
+                    ->from("ventas@ilaccesorios.shop", $user->name)
                     ->subject($subject);
             });
 

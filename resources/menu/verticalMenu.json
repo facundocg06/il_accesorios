@@ -14,22 +14,8 @@
                     "url": "/ventas-reportes",
                     "name": "Reportes Ventas",
                     "slug": "ventas-reportes"
-                },
-                {
-                    "url": "/date-reports",
-                    "name": "Reportes Ventas por Fechas",
-                    "slug": "ventas-reportes-fechas"
-                },
-                {
-                    "url": "/reports/ventas/producto",
-                    "name": "Reportes Ventas por Producto",
-                    "slug": "ventas-reportes-producto"
-                },
-                {
-                    "url": "/reports/adjustments",
-                    "name": "Reportes Ingreos y Egresos",
-                    "slug": "ventas-Ingresos-Egresos"
                 }
+               
             ],
             "can": "Administrador"
         },
@@ -57,12 +43,11 @@
                 },
                 {
                     "url": "inventory-adjustments/create",
-                    "name": "Aluste de Inventario",
+                    "name": "Ajuste de Inventario",
                     "slug": "inventory-adjustments"
                 }
-                
             ],
-            "can":"Almacenero"
+            "can": "Almacenero"
         },
         {
             "name": "Clientes",
@@ -102,6 +87,33 @@
                 }
             ],
             "can": "Vendedor"
+        },
+        {
+            "name": "Reportes",
+            "icon": "menu-icon tf-icons ti ti-home",
+            "slug": "home",
+            "submenu": [
+                {
+                    "url": "/date-reports",
+                    "name": "Reportes Ventas por Fechas",
+                    "slug": "ventas-reportes-fechas",
+                    "can": ["Administrador", "Vendedor"]
+                },
+                
+                {
+                    "url": "/reports/ventas/producto",
+                    "name": "Reportes Ventas por Producto",
+                    "slug": "ventas-reportes-producto",
+                    "can": ["Administrador", "Vendedor"]
+                },
+                {
+                    "url": "/reports/adjustments",
+                    "name": "Reportes Ingresos y Egresos",
+                    "slug": "ventas-Ingresos-Egresos",
+                    "can": ["Administrador", "Almacenero"]
+                }
+            ]
+            
         }
     ]
 }
