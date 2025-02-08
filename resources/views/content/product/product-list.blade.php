@@ -156,15 +156,6 @@
                                         <td>{{ $stock->id }}</td>
                                         <td>{{ $stock->store->name ?? 'N/A' }}</td>
                                         <td>{{ $stock->quantity }}</td>
-                                        <td>
-                                            <button type="button" class="btn btn-sm btn-primary"
-                                                data-bs-toggle="modal"
-                                                data-bs-target="#editStockModal"
-                                                data-stock-id="{{ $stock->id }}"
-                                                data-quantity="{{ $stock->quantity }}">
-                                                Editar
-                                            </button>
-                                        </td>
                                     </tr>
                                     @endforeach
                                 </tbody>
