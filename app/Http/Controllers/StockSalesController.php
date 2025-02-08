@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\StockSales;
-use App\Models\Product;
-use App\Models\Store;
 use App\Models\Color;
+use App\Models\Product;
 use App\Models\Size;
+use App\Models\StockSales;
+use App\Models\Store;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class StockSalesController extends Controller
 {
@@ -107,24 +108,36 @@ class StockSalesController extends Controller
     // Método para agregar Stock
     public function addStock(Request $request)
     {
-        // Validar la entrada, incluyendo todos los campos requeridos
+        // Validar la entrada
         $request->validate([
-            'product_id' => 'required|exists:products,id',  // El producto debe existir
-            'store_id' => 'required|exists:stores,id',  // La tienda debe existir
-            'quantity' => 'required|integer|min:1',  // Cantidad debe ser un número entero positivo
-
+            'product_id' => 'required|exists:products,id',
+            'store_id' => 'required|exists:stores,id',
+            'quantity' => 'required|integer|min:1',
         ]);
 
-        // Crear un nuevo registro de StockSales con todos los campos
-        StockSales::create([
-            'product_id' => $request->product_id,
-            'store_id' => $request->store_id,
-            'quantity' => $request->quantity,
-            'created_by' => auth()->id(),  // El ID del usuario que crea el registro
-            'updated_by' => auth()->id(),  // El ID del usuario que actualiza el registro
-        ]);
+        DB::transaction(function () use ($request) {
+            // Buscar si ya existe el stock del producto en la tienda
+            $stock = StockSales::where('product_id', $request->product_id)
+                ->where('store_id', $request->store_id)
+                ->first();
 
-        // Redirigir con un mensaje de éxito
-        return redirect()->route('product-list')->with('success', 'Stock agregado correctamente.');
+            if ($stock) {
+                // Si existe, sumar la cantidad
+                $stock->increment('quantity', $request->quantity);
+                $stock->updated_by = auth()->id();
+                $stock->save();
+            } else {
+                // Si no existe, crear un nuevo stock
+                StockSales::create([
+                    'product_id' => $request->product_id,
+                    'store_id' => $request->store_id,
+                    'quantity' => $request->quantity,
+                    'created_by' => auth()->id(),
+                    'updated_by' => auth()->id(),
+                ]);
+            }
+        });
+
+        return redirect()->route('product-list')->with('success', 'Stock actualizado correctamente.');
     }
 }
