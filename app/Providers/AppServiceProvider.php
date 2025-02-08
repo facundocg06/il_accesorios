@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Illuminate\Support\Facades\URL;
 use Livewire\Livewire;
 use App\Models\PurchaseDetail;
 use Illuminate\Support\Facades\Route;
@@ -113,7 +114,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        \URL::forceScheme('https');
+
         Livewire::setScriptRoute(function ($handle) {
+
             // Define la ruta personalizada con tu contexto específico
             return Route::get('/inf513/grupo07sc/CREAMODA-LARAVEL/public/livewire/livewire.js', $handle);
         });
