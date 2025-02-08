@@ -54,7 +54,7 @@ class InventoryAdjustmentController extends Controller
                     $stock = StockSales::create([
                         'product_id' => $request->product_id,
                         'store_id' => $request->store_id,
-                        'quantity' => $request->quantity,
+                        'quantity' => 0,
                         'created_by' => auth()->user()->id,
                         'updated_by' => auth()->user()->id,
                     ]);
