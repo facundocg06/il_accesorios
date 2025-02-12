@@ -59,7 +59,7 @@
                     "slug": "inventory-adjustments"
                 }
             ],
-            "can": "Inventario y Ajustes"
+            "can": "Inventario"
         },
         {
             "name": "Clientes",

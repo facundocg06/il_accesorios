@@ -312,6 +312,7 @@ class SaleController extends Controller
                     ->subject("Reporte de Ventas - Producto: {$product->name}");
             });
 
+
             return redirect()->route('reports.ventas.producto.form')
                 ->with('success', 'El reporte de ventas por producto se envió correctamente.');
         } catch (\Exception $e) {

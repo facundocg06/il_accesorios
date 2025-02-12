@@ -136,29 +136,18 @@
             });
         }
 
-        // Función para añadir nuevo producto
+
         document.getElementById('addProduct').addEventListener('click', function() {
             productCounter++;
-
-            // Clonar el primer producto
             const template = document.querySelector('.product-item').cloneNode(true);
-
-            // Actualizar los nombres de los campos
             const select = template.querySelector('select');
             const input = template.querySelector('input');
             const deleteBtn = template.querySelector('.delete-product');
-
             select.name = `products[${productCounter}][product_id]`;
             input.name = `products[${productCounter}][quantity]`;
-
-            // Limpiar valores
             select.value = '';
             input.value = '';
-
-            // Mostrar botón de eliminar
             deleteBtn.style.display = 'block';
-
-            // Añadir el nuevo producto al contenedor
             document.getElementById('productsContainer').appendChild(template);
 
             // Reinicializar Select2 en el nuevo select
