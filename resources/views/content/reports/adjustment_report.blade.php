@@ -14,6 +14,8 @@
                     </small>
                 </div>
 
+
+
                 <div class="card-body">
                     <table class="table table-bordered">
                         <thead>
@@ -41,13 +43,21 @@
                             @endforelse
                         </tbody>
                     </table>
+                    @if($pdfPath)
+                    <div class="mt-3">
+                        <h5>Reporte en PDF</h5>
+                        <a href="{{ asset('storage/' . $pdfPath) }}" class="btn btn-primary" target="_blank">Ver PDF</a>
+                    </div>
+                    @endif
 
                     <form action="{{ route('reports.adjustments.send_email') }}" method="POST">
                         @csrf
                         <input type="hidden" name="store_id" value="{{ $store->id }}">
                         <input type="hidden" name="start_date" value="{{ $startDate }}">
                         <input type="hidden" name="end_date" value="{{ $endDate }}">
+                        <input type="hidden" name="pdf_path" value="{{ $pdfPath }}">
                         <input type="hidden" name="adjustment_type" value="{{ $adjustmentType }}">
+
                         <div class="mb-3">
                             <label for="recipient_email" class="form-label">Correo del Destinatario</label>
                             <input type="email" name="recipient_email" id="recipient_email" class="form-control" required>

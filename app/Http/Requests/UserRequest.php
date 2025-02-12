@@ -27,9 +27,9 @@ class UserRequest extends FormRequest
             'name' => 'required|string|max:255',
             'lastname' => 'required|string|max:255',
             'email' => 'required|string|email|max:255',
-            'password' => ['required',Password::min(8)->mixedCase()->numbers()->symbols(),],
+            'password' => ['required', Password::min(8)->mixedCase()->numbers()->symbols(),],
             'phone' => 'required',
-            'rolType' => 'required'
+
         ];
     }
     public function messages(): array
@@ -51,9 +51,9 @@ class UserRequest extends FormRequest
             'password.min' => 'La contraseña debe tener al menos 8 caracteres.',
             'password.mixedCase' => 'La contraseña debe incluir letras mayúsculas y minúsculas.',
             'password.numbers' => 'La contraseña debe incluir al menos un número.',
-            'password.symbols' => 'La contraseña debe incluir al menos un carácter especial.',            
+            'password.symbols' => 'La contraseña debe incluir al menos un carácter especial.',
             'phone.required' => 'El número de teléfono es obligatorio.',
-            'rolType.required' => 'El rol del usuario es obligatorio.',
+
         ];
     }
 }

@@ -1,22 +1,24 @@
 <?php
 
-use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\InventoryAdjustmentController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\PurchaseController;
+use App\Http\Controllers\RolePermissionController;
 use App\Http\Controllers\SaleController;
 use App\Http\Controllers\StockProducctionController;
+use App\Http\Controllers\StockSalesController;
 use App\Http\Controllers\StorageController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\UserController;
 use App\Livewire\Product as ProductLivewire;
 use App\Models\StockProduction;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\StockSalesController;
-use App\Http\Controllers\InventoryAdjustmentController;
+
 
 
 
@@ -84,7 +86,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/date-reports', [SaleController::class, 'salesReportForm'])->name('reports.ventas.form');
     Route::post('/generate', [SaleController::class, 'generateSalesReport'])->name('reports.ventas.generate');
-    Route::post('/email', [SaleController::class, 'sendSalesReport'])->name('reports.ventas.email');
+    Route::post('/reports/ventas/send', [SaleController::class, 'sendSalesReport'])->name('reports.ventas.send');
     /* -----------------------------------------USERS------------------------------------------------- */
     Route::get('user/user-list', [UserController::class, 'user_list'])->name('user-list');
     Route::post('user/user-add', [UserController::class, 'register_user'])->name('user-add');
@@ -159,4 +161,13 @@ Route::middleware('auth')->group(function () {
 
     Route::post('/send-adjustment-email', [InventoryAdjustmentController::class, 'sendAdjustmentReport'])
         ->name('reports.adjustments.send_email');
+
+
+    Route::get('/roles-permissions', [RolePermissionController::class, 'index'])->name('roles-permissions.index');
+    Route::post('/roles', [RolePermissionController::class, 'storeRole'])->name('roles.store');
+    Route::post('/permissions', [RolePermissionController::class, 'storePermission'])->name('permissions.store');
+    Route::post('/assign-role', [RolePermissionController::class, 'assignRole'])->name('assign.role');
+    Route::post('/assign-permission', [RolePermissionController::class, 'assignPermission'])->name('assign.permission');
+    Route::post('/remove-role', [RolePermissionController::class, 'removeRole'])->name('remove.role');
+    Route::post('/remove-permission', [RolePermissionController::class, 'removePermission'])->name('remove.permission');
 });

@@ -40,7 +40,7 @@ class UserService
             } else {
                 // Si no existe, crear un nuevo usuario
                 $user = $this->userRepository->create($data);
-                $user->assignRole($data['rolType']);
+                // $user->assignRole('Invitado');
                 return new UserResource($user);
             }
         });
@@ -53,7 +53,7 @@ class UserService
             if (!$user) {
                 throw new \Exception(ErrorMessages::NOT_FOUND);
             }
-            $user =$this->userRepository->update($data,$user);
+            $user = $this->userRepository->update($data, $user);
             return new UserResource($user);
         });
     }

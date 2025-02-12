@@ -21,9 +21,9 @@ class RolPermissionSeeder extends Seeder
 
         // Crear un permiso para cada rol con el mismo nombre que el rol
         $adminPermission = Permission::create(['name' => 'Administrador']);
-        $sellerPermission = Permission::create(['name' => 'Vendedor']);
-        $buyerPermission = Permission::create(['name' => 'Comprador']);
-        $inventoryPermission = Permission::create(['name' => 'Almacenero']);
+        $sellerPermission = Permission::create(['name' => 'Ventas']);
+        $buyerPermission = Permission::create(['name' => 'Compras']);
+        $inventoryPermission = Permission::create(['name' => 'Inventario y Ajustes']);
 
         // Asignar permisos a los roles correspondientes
         $adminRole->givePermissionTo($adminPermission, $sellerPermission, $buyerPermission, $inventoryPermission);

@@ -7,8 +7,7 @@
 
 <body>
     <h1>Reporte de Ventas</h1>
-    <p>Desde: {{ $startDate }}</p>
-    <p>Hasta: {{ $endDate }}</p>
+
 
     <table border="1" cellpadding="5" cellspacing="0">
         <thead>

@@ -11,8 +11,10 @@ use App\Models\Services\QRService;
 use App\Models\Services\SaleService;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
-
+use Illuminate\Support\Facades\Storage;
+use Pdfcrowd;
 
 class SaleController extends Controller
 {
@@ -42,7 +44,6 @@ class SaleController extends Controller
     {
         $products = Product::with(['stockSales.store'])->get();
         return view('content.sale.sale-add', compact('products'));
-        //return view('content.sale.sale-add');
     }
     public function register_sale(SalesRequest $salesRequest)
     {
@@ -69,10 +70,69 @@ class SaleController extends Controller
     }
     public function salesReportForm()
     {
-        return view('content.reports.ventasReport');
+        $products = Product::all();
+
+        return view('content.reports.ventasReport', compact('products'));
+    }
+    public function generateSalesReport(Request $request)
+    {
+        $request->validate([
+            'product_id'  => 'nullable|exists:products,id',
+            'start_date'  => 'required|date',
+            'end_date'    => 'required|date|after_or_equal:start_date',
+        ]);
+
+        $productId = $request->input('product_id');
+        $startDate = $request->input('start_date');
+        $endDate = $request->input('end_date');
+
+        // Obtener las ventas dependiendo si se seleccionó un producto o no
+        if ($productId) {
+            $product = Product::findOrFail($productId);
+            $sales = $this->saleService->getSalesByProduct($productId, $startDate, $endDate);
+        } else {
+            $product = null;
+            $sales = $this->saleService->getSalesBetweenDates($startDate, $endDate);
+        }
+        $pdfPath = null;
+        Log::info($sales);
+
+        $pdfPath = $this->generatePdfFile($sales, $startDate, $endDate, $product);
+
+        // Mostrar el reporte en la vista junto con la ruta del PDF
+        return view('content.reports.sale-report', [
+            'sales'     => $sales,
+            'product'   => $product,
+            'startDate' => $startDate,
+            'endDate'   => $endDate,
+            'pdfPath'   => $pdfPath, // Pasar la ruta del PDF a la vista
+        ]);
     }
 
-    public function generateSalesReport(Request $request)
+    /**
+     * Genera un archivo PDF y lo guarda en storage.
+     */
+    private function generatePdfFile($sales, $startDate, $endDate, $product)
+    {
+        try {
+            $pdfView = view('content.reports.sales_pdf', [
+                'sales'     => $sales,
+                'product'   => $product,
+                'startDate' => $startDate,
+                'endDate'   => $endDate,
+            ])->render();
+
+            $client = new Pdfcrowd\HtmlToPdfClient(env('PDFCROWD_USERNAME'), env('PDFCROWD_API_KEY'));
+            $pdfPath = 'reports/sales_report_' . time() . '.pdf';
+            $filePath = storage_path('app/public/' . $pdfPath);
+            $client->convertStringToFile($pdfView, $filePath);
+
+            return $filePath; // Devolver la ruta del PDF generado
+        } catch (\Exception $e) {
+            return null; // Retornar null si hay un error
+        }
+    }
+    public function generateSalesReport1(Request $request)
     {
         if ($request->method() !== 'POST') {
             return redirect()->route('reports.ventas.form')->with('error', 'Por favor, utiliza el formulario para generar un reporte.');
@@ -151,49 +211,66 @@ class SaleController extends Controller
     public function sendSalesReport(Request $request)
     {
         $request->validate([
-            'start_date' => 'required|date',
-            'end_date' => 'required|date',
+            'product_id'  => 'nullable|exists:products,id',
+            'start_date'  => 'required|date',
+            'end_date'    => 'required|date|after_or_equal:start_date',
             'recipient_email' => 'required|email',
+            'pdf_path'        => 'required|string', // El PDF debe estar presente
         ]);
 
         $startDate = $request->input('start_date');
         $endDate = $request->input('end_date');
         $recipientEmail = $request->input('recipient_email');
         $user = auth()->user(); // Usuario autenticado
-        try {
-            // Usamos el servicio para obtener las ventas
-            $sales = $this->saleService->getSalesBetweenDates($startDate, $endDate);
+        $recipientEmail = $request->input('recipient_email');
+        $pdfPath = $request->input('pdf_path');
+        $productId = $request->input('product_id');
 
-            // Creamos los datos para el correo
+        // Verificar si el PDF existe antes de enviarlo
+        if (!file_exists($pdfPath)) {
+            return redirect()->route('reports.ventas.form')->with('error', 'El PDF no se encontró o fue eliminado.');
+        }
+
+        try {
+            if ($productId) {
+                $product = Product::findOrFail($productId);
+                $sales = $this->saleService->getSalesByProduct($productId, $startDate, $endDate);
+            } else {
+                $product = null;
+                $sales = $this->saleService->getSalesBetweenDates($startDate, $endDate);
+            }
+
+
+
+
+            // Datos para el correo
             $emailData = [
-                'sales' => $sales,
+                'sales'     => $sales,
+                'product'   => $product,
                 'startDate' => $startDate,
-                'endDate' => $endDate,
-                'userName' => $user->name,
+                'endDate'   => $endDate,
+                'userName'  => $user->username,
             ];
 
-            // Enviamos el correo
-            Mail::send('content.emails.sales_report', $emailData, function ($message) use ($recipientEmail, $user) {
+
+            Mail::send('content.emails.sales_report', $emailData, function ($message) use ($recipientEmail, $pdfPath) {
                 $message->to($recipientEmail)
-                    ->from($user->email, $user->name) // Remitente
-                    ->subject('Reporte de Ventas'); // Asunto
+                    ->from(env('MAIL_FROM_ADDRESS'), env('MAIL_FROM_NAME'))
+                    ->subject('Reporte de Ventas')
+                    ->attach($pdfPath, [
+                        'as' => 'reporte_ventas.pdf',
+                        'mime' => 'application/pdf',
+                    ]);
             });
+
             return redirect()->route('reports.ventas.form')->with('success', 'El reporte de ventas se envió correctamente.');
         } catch (\Exception $e) {
-            // Redirigir al inicio con un mensaje de error
-            return redirect()->route('reports.ventas.form')->with('error', 'Hubo un problema al enviar el correo: ' . $e->getMessage());
+            return redirect()->route('reports.ventas.form')->with('error', 'Error al enviar el correo: ' . $e->getMessage());
         }
     }
 
-    /**
-     * Envía el reporte de ventas por producto por correo electrónico.
-     *
-     * @param mixed  $sales
-     * @param mixed  $product
-     * @param string $startDate
-     * @param string $endDate
-     * @param string $recipientEmail
-     */
+
+
     public function sendSalesByProductReport(Request $request)
     {
         $request->validate([
@@ -221,13 +298,13 @@ class SaleController extends Controller
                 'product'   => $product,
                 'startDate' => $startDate,
                 'endDate'   => $endDate,
-                'userName'  => $user->name,
+                'userName'  => $user->username,
             ];
 
             // Enviar correo
             Mail::send('content.emails.sales_by_product_report', $emailData, function ($message) use ($recipientEmail, $user, $product) {
                 $message->to($recipientEmail)
-                    ->from($user->email, $user->name)
+                    ->from(env('MAIL_FROM_ADDRESS'), env('MAIL_FROM_NAME'))
                     ->subject("Reporte de Ventas - Producto: {$product->name}");
             });
 
@@ -236,30 +313,6 @@ class SaleController extends Controller
         } catch (\Exception $e) {
             return redirect()->route('reports.ventas.producto.form')
                 ->with('error', 'Hubo un problema al enviar el correo: ' . $e->getMessage());
-        }
-    }
-
-
-
-
-
-    protected function sendSalesEmail($sales, $subject, $recipientEmail, $user, $view, $extraData = [])
-    {
-        try {
-            $emailData = array_merge([
-                'sales' => $sales,
-                'userName' => $user->name,
-            ], $extraData);
-
-            Mail::send($view, $emailData, function ($message) use ($recipientEmail, $user, $subject) {
-                $message->to($recipientEmail)
-                    ->from($user->email, $user->name)
-                    ->subject($subject);
-            });
-
-            return back()->with('success', 'El reporte de ventas se envió correctamente.');
-        } catch (\Exception $e) {
-            return back()->with('error', 'Hubo un problema al enviar el correo: ' . $e->getMessage());
         }
     }
 }

@@ -38,11 +38,13 @@
                             @endforelse
                         </tbody>
                     </table>
-                    <form action="{{ route('reports.ventas.email') }}" method="POST">
+                    <form action="{{  route('reports.ventas.send') }}" method="POST">
                         @csrf
-                        <input type="hidden" name="start_date" value="{{ $startDate }}">
-                        <input type="hidden" name="end_date" value="{{ $endDate }}">
                         <div class="mb-3">
+                            <input type="hidden" name="product_id" value="{{ $product?->id }}">
+                            <input type="hidden" name="start_date" value="{{ $startDate }}">
+                            <input type="hidden" name="end_date" value="{{ $endDate }}">
+                            <input type="hidden" name="pdf_path" value="{{ $pdfPath }}">
                             <label for="recipient_email" class="form-label">Correo del Destinatario</label>
                             <input type="email" name="recipient_email" id="recipient_email" class="form-control" placeholder="Ejemplo: destinatario@email.com" required>
                         </div>

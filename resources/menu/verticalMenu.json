@@ -14,22 +14,8 @@
                     "url": "/ventas-reportes",
                     "name": "Reportes Ventas",
                     "slug": "ventas-reportes"
-                },
-                {
-                    "url": "/date-reports",
-                    "name": "Reportes Ventas por Fechas",
-                    "slug": "ventas-reportes-fechas"
-                },
-                {
-                    "url": "/reports/ventas/producto",
-                    "name": "Reportes Ventas por Producto",
-                    "slug": "ventas-reportes-producto"
-                },
-                {
-                    "url": "/reports/adjustments",
-                    "name": "Reportes Ingreos y Egresos",
-                    "slug": "ventas-Ingresos-Egresos"
                 }
+               
             ],
             "can": "Administrador"
         },
@@ -57,26 +43,25 @@
                 },
                 {
                     "url": "inventory-adjustments/create",
-                    "name": "Aluste de Inventario",
+                    "name": "Ajuste de Inventario",
                     "slug": "inventory-adjustments"
                 }
-                
             ],
-            "can":"Almacenero"
+            "can": "Inventario y Ajustes"
         },
         {
             "name": "Clientes",
             "icon": "menu-icon tf-icons ti ti-user",
             "slug": "customer-list",
             "url": "customer/customer-list",
-            "can": "Vendedor"
+            "can": "Ventas"
         },
         {
             "name": "Proveedores",
             "icon": "menu-icon tf-icons ti ti-truck",
             "slug": "supplier-list",
             "url": "supplier/supplier-list",
-            "can": "Vendedor"
+            "can": "Compras"
         },
         {
             "name": "Almacenes",
@@ -101,7 +86,34 @@
                     "slug": "sales-add"
                 }
             ],
-            "can": "Vendedor"
+            "can": "Ventas"
+        },
+        {
+            "name": "Reportes",
+            "icon": "menu-icon tf-icons ti ti-home",
+            "slug": "home",
+            "submenu": [
+                {
+                    "url": "/date-reports",
+                    "name": "Reportes Ventas por Fechas",
+                    "slug": "ventas-reportes-fechas",
+                    "can": ["Administrador", "Ventas"]
+                },
+                
+                {
+                    "url": "/reports/ventas/producto",
+                    "name": "Reportes Ventas por Producto",
+                    "slug": "ventas-reportes-producto",
+                    "can": ["Administrador", "Ventas"]
+                },
+                {
+                    "url": "/reports/adjustments",
+                    "name": "Reportes Ingresos y Egresos",
+                    "slug": "ventas-Ingresos-Egresos",
+                    "can": ["Administrador", "Ventas"]
+                }
+            ]
+            
         }
     ]
 }
