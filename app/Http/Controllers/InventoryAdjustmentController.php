@@ -265,6 +265,10 @@ class InventoryAdjustmentController extends Controller
                     ->subject("Reporte de Ajustes de Inventario - Tienda: {$store->name}")
                     ->attach(storage_path("app/public/$pdfPath")); // Adjuntar el PDF
             });
+            // Eliminar el PDF después de enviarlo
+            if (file_exists(storage_path("app/public/$pdfPath"))) {
+                unlink(storage_path("app/public/$pdfPath"));
+            }
 
             return redirect()->route('reports.adjustments.form')
                 ->with('success', 'El reporte de ajustes de inventario se envió correctamente.');

@@ -23,9 +23,21 @@
             "name": "Usuarios",
             "icon": "menu-icon tf-icons ti ti-users",
             "slug": "users",
-            "url": "user/user-list",
+             "submenu": [
+                {
+                    "url": "user/user-list",
+                    "name": "Registrar Usuarios",
+                    "slug": "users-list"
+                },
+                {
+                    "url": "roles-permissions",
+                    "name": "Permisos y Roles",
+                    "slug": "rol-permission"
+                }
+            ],           
             "can": "Administrador"
         },
+        
         {
             "name": "Inventario",
             "icon": "menu-icon tf-icons ti ti-package",
@@ -98,14 +110,7 @@
                     "name": "Reportes Ventas por Fechas",
                     "slug": "ventas-reportes-fechas",
                     "can": ["Administrador", "Ventas"]
-                },
-                
-                {
-                    "url": "/reports/ventas/producto",
-                    "name": "Reportes Ventas por Producto",
-                    "slug": "ventas-reportes-producto",
-                    "can": ["Administrador", "Ventas"]
-                },
+                },               
                 {
                     "url": "/reports/adjustments",
                     "name": "Reportes Ingresos y Egresos",

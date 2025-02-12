@@ -262,6 +262,10 @@ class SaleController extends Controller
                         'mime' => 'application/pdf',
                     ]);
             });
+            // Eliminar el PDF después de enviarlo
+            if (file_exists(storage_path("app/public/$pdfPath"))) {
+                unlink(storage_path("app/public/$pdfPath"));
+            }
 
             return redirect()->route('reports.ventas.form')->with('success', 'El reporte de ventas se envió correctamente.');
         } catch (\Exception $e) {
